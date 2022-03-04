@@ -3,7 +3,6 @@ package dealership.com.service;
 import dealership.com.exception.ResourceAlreadyExist;
 import dealership.com.exception.ResourceNotFoundException;
 import dealership.com.model.Car;
-import dealership.com.model.Client;
 import dealership.com.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

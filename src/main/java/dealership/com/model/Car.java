@@ -18,9 +18,6 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    private Client client;
-
     @NonNull
     @Column(name = "vin")
     private int vin;
