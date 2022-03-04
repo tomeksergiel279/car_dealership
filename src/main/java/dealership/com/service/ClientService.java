@@ -64,7 +64,6 @@ public class ClientService {
 
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteClient(@PathVariable("id") long id){
-        Optional<Client> clientFromDb = clientRepository.findById(id);
 
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Client not exist with id:" + id));
@@ -72,7 +71,4 @@ public class ClientService {
         clientRepository.delete(client);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
-
 }

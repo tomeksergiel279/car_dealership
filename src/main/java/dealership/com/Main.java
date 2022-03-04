@@ -22,6 +22,10 @@ public class Main {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/client").allowedOrigins(LOCALHOST);
                 registry.addMapping("/car").allowedOrigins(LOCALHOST);
+                registry.addMapping("/department").allowedOrigins(LOCALHOST);
+                registry.addMapping("/buy").allowedOrigins(LOCALHOST);
+                registry.addMapping("/employee").allowedOrigins(LOCALHOST);
+                registry.addMapping("/servicebooklet").allowedOrigins(LOCALHOST);
             }
         };
     }

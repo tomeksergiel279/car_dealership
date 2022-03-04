@@ -3,6 +3,7 @@ package dealership.com.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -19,6 +20,7 @@ public class Employee {
     private Long id;
 
     @ManyToOne            //wiele pracowników do jednej placówki
+    @NonNull
     Department department;
 
     @NonNull
@@ -44,4 +46,5 @@ public class Employee {
     @NonNull
     @Column(name = "phone_number")
     private int phoneNumber;
+
 }

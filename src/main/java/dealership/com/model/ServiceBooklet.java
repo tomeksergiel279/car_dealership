@@ -8,6 +8,7 @@ import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -20,7 +21,6 @@ public class ServiceBooklet {
     private Long id;
 
     @OneToOne            //jedna książeczka dla jednego samochodu
-    @NonNull
     private Car car;
 
     @NonNull

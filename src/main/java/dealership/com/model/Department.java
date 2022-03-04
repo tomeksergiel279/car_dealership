@@ -19,6 +19,10 @@ public class Department {
     private Long id;
 
     @NonNull
+    @Column(name = "name")
+    private String name;
+
+    @NonNull
     @Column(name = "city")
     private String city;
 

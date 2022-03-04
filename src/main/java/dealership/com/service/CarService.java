@@ -26,9 +26,9 @@ public class CarService {
 
     @PostMapping
     public Car addCar(@RequestBody Car car) {
-        Optional<Car> clientFromDb = carRepository.findByVin(car.getVin());
+        Optional<Car> carFromDb = carRepository.findByVin(car.getVin());
 
-        if(clientFromDb.isPresent()){
+        if(carFromDb.isPresent()){
             throw new ResourceAlreadyExist("Car already exist with vin: "+ car.getVin());
         }
 
@@ -37,6 +37,7 @@ public class CarService {
 
     @GetMapping("{id}")
     public ResponseEntity<Car> getCarById(@PathVariable("id")  long id){
+
         Car car = carRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Car not exist with id:" + id));
 
@@ -63,7 +64,6 @@ public class CarService {
 
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteCar(@PathVariable("id") long id){
-        Optional<Car> carFromDb = carRepository.findById(id);
 
         Car car = carRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Car not exist with id:" + id));
