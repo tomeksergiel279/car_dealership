@@ -18,15 +18,15 @@ public class Buy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne                      //wiele zakupów w jednym oddziale
     @NonNull
     private Department department;
 
-    @ManyToOne
+    @ManyToOne                      //wiele zakupów dla jednego klienta
     @NonNull
     private Client client;
 
-    @OneToOne
+    @OneToOne                       //jeden zakup dla jednego samochodu
     @NonNull
     private Car car;
 }

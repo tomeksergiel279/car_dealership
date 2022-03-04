@@ -19,7 +19,7 @@ public class ServiceBooklet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne            //jedna książeczka dla jednego samochodu
     @NonNull
     private Car car;
 

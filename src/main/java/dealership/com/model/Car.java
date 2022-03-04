@@ -20,7 +20,7 @@ public class Car {
 
     @NonNull
     @Column(name = "vin")
-    private int vin;
+    private String vin;
 
     @NonNull
     @Column(name = "img")
