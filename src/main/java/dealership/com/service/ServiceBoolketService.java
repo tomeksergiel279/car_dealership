@@ -45,7 +45,7 @@ public class ServiceBoolketService {
         Car car = carRepository.findByVin(vin)
                 .orElseThrow(() -> new ResourceNotFoundException("Department not exist with vin:" + vin));
 
-        serviceBooklet.setCar(car);
+        serviceBooklet.setCar_booklet(car);
         return serviceBookletRepository.save(serviceBooklet);
     }
 

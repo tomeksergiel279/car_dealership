@@ -42,7 +42,7 @@ public class EmployeeService {
         if(employeeFromDB.isPresent()){
             throw new ResourceAlreadyExist("Employee already exist with login: "+ employee.getLogin());
         }
-        employee.setDepartment(department);
+        employee.setDepartment_employee(department);
         return employeeRepository.save(employee);
     }
 

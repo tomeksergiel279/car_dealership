@@ -1,8 +1,11 @@
 package dealership.com.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -49,4 +52,9 @@ public class Client {
     @NonNull
     @Column(name = "phone_number")
     private int phoneNumber;
+
+    //jeden kklient może posiadać wiele zakupów
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private Set<Buy> buys = new HashSet<>();
 }

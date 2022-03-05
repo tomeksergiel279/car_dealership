@@ -1,5 +1,7 @@
 package dealership.com.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,8 +22,11 @@ public class ServiceBooklet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne            //jedna książeczka dla jednego samochodu
-    private Car car;
+    //jedna książka dla jednego samochodu
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id")
+    @JsonBackReference
+    private Car car_booklet;
 
     @NonNull
     @Column(name = "service_inspection")

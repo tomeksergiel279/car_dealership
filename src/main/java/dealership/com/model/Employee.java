@@ -19,9 +19,10 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne            //wiele pracowników do jednej placówki
-    @NonNull
-    Department department;
+    //jeden oddział może posiadać wielu pracowników
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    private Department department_employee;
 
     @NonNull
     @Column(name = "login")

@@ -1,16 +1,15 @@
 package dealership.com.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
 @ToString
 @Entity
+@NoArgsConstructor
 @Table(name = "buys")
 public class Buy {
 
@@ -18,15 +17,25 @@ public class Buy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne                      //wiele zakupów w jednym oddziale
-    @NonNull
-    private Department department;
+    //jeden oddział może posiadać wiele zakupów
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    private Department department_buy;
 
-    @ManyToOne                      //wiele zakupów dla jednego klienta
-    @NonNull
+    //jeden kleint może posiadać wiele zakupów
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
-    @OneToOne                       //jeden zakup dla jednego samochodu
-    @NonNull
+    //jeden samochód dla jednego zakupu
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id")
+    @JsonBackReference
     private Car car;
+
+    public Buy(Department department_buy, Client client, Car car) {
+        this.department_buy = department_buy;
+        this.client = client;
+        this.car = car;
+    }
 }
