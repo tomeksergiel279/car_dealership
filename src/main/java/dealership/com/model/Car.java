@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @ToString
 @Entity
 @Table(name = "cars")
@@ -20,42 +19,34 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NonNull
-    @Column(name = "vin")
+    @Column(name = "vin", nullable = false, unique = true)
     private String vin;
 
-    @NonNull
-    @Column(name = "img")
+    @Column(name = "img", nullable = false)
     private String img;
 
-    @NonNull
-    @Column(name = "mark")
+    @Column(name = "mark", nullable = false)
     private String mark;
 
-    @NonNull
-    @Column(name = "model")
+    @Column(name = "model", nullable = false)
     private String model;
 
-    @NonNull
-    @Column(name = "color")
+    @Column(name = "color", nullable = false)
     private String color;
 
-    @NonNull
-    @Column(name = "production_year")
+    @Column(name = "production_year", nullable = false)
     private long productionYear;
 
-    @NonNull
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private long price;
 
     //jedna książka dla jednego samochodu
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "car_booklet")
-    @JsonManagedReference
     private ServiceBooklet serviceBooklet;
 
     //jeden samochód dla jednego zakupu
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "car")
-    @JsonManagedReference
+    @JsonBackReference
     private Buy buy;
 
 }

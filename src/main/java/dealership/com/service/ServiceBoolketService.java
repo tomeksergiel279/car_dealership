@@ -55,7 +55,7 @@ public class ServiceBoolketService {
                 .orElseThrow(() -> new ResourceNotFoundException("ServiceBooklet not exist with id: " + id));
 
         updateServiceBooklet.setServiceInspection(serviceBooklet.getServiceInspection());
-        updateServiceBooklet.setRepairs(serviceBooklet.getRepairs());
+        updateServiceBooklet.setLastRepair(serviceBooklet.getLastRepair());
 
         serviceBookletRepository.save(updateServiceBooklet);
 

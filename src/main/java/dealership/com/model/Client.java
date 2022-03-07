@@ -1,5 +1,6 @@
 package dealership.com.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -11,7 +12,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @ToString
 @Entity
 @Table(name = "clients")
@@ -21,40 +21,32 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
-    @Column(name = "login")
+    @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @NonNull
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @NonNull
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @NonNull
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @NonNull
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @NonNull
-    @Column(name = "postal_code")
+    @Column(name = "postal_code", nullable = false)
     private String postalCode;
 
-    @NonNull
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @NonNull
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private int phoneNumber;
 
     //jeden kklient może posiadać wiele zakupów
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(mappedBy = "client")
     private Set<Buy> buys = new HashSet<>();
 }

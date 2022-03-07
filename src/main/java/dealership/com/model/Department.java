@@ -1,5 +1,6 @@
 package dealership.com.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -12,7 +13,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @ToString
 @Entity
 @Table(name = "departments")
@@ -22,25 +22,21 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @NonNull
-    @Column(name = "city")
+    @Column(name = "city", nullable = false)
     private String city;
 
-    @NonNull
-    @Column(name = "postal_code")
+    @Column(name = "postal_code", nullable = false)
     private String postalCode;
 
     //jeden oddział może posiadać wielu pracowników
-    @JsonIgnore
     @OneToMany(mappedBy = "department_employee")
     private Set<Employee> employees = new HashSet<>();
 
     //jeden oddział może posiadać wiele zakupów
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(mappedBy = "department_buy")
     private Set<Buy> buys = new HashSet<>();
 

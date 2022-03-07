@@ -1,16 +1,15 @@
 package dealership.com.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
 
+import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @ToString
 @Getter
 @Setter
@@ -24,14 +23,13 @@ public class ServiceBooklet {
 
     //jedna książka dla jednego samochodu
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "car_id", unique = true, nullable = false)
     @JsonBackReference
     private Car car_booklet;
 
-    @NonNull
     @Column(name = "service_inspection")
     private Date serviceInspection;
 
-    @Column(name = "repairs")
-    private String repairs;
+    @Column(name = "last_repair")
+    private String lastRepair;
 }

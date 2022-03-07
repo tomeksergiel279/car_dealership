@@ -1,5 +1,6 @@
 package dealership.com.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,6 @@ import java.util.Optional;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 @ToString
 @Entity
 @Table(name = "employees")
@@ -20,32 +20,27 @@ public class Employee {
     private Long id;
 
     //jeden oddział może posiadać wielu pracowników
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
+    @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
     private Department department_employee;
 
-    @NonNull
-    @Column(name = "login")
+    @Column(name = "login", nullable = false, unique = true)
     private String login;
 
-    @NonNull
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @NonNull
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @NonNull
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @NonNull
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @NonNull
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private int phoneNumber;
 
 }
