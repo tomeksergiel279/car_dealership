@@ -6,12 +6,14 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import About from "./About";
-import Home from "./Home";
-import Contact from "./Contact";
+import About from "./subpages/About";
+import Home from "./subpages/Home";
+import Contact from "./subpages/Contact";
 import Login from "./Login";
-import Cars from "./Cars";
-import Employees from "./Employees";
+import Cars from "./subpages/Cars";
+import Employees from "./subpages/Employees";
+import Clients from "./subpages/Clients";
+import Departments from "./subpages/Departments";
 
 
 
@@ -28,15 +30,17 @@ export default class NavbarComp extends Component{
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
                                 <Nav.Link></Nav.Link>
+                                <Nav.Link as={Link} to={"/home"}>Strona główna</Nav.Link>
                                 <Nav.Link as={Link} to={"/cars"}>Samochody</Nav.Link>
                                 <Nav.Link as={Link} to={"/employees"}>Pracownicy</Nav.Link>
+                                <Nav.Link as={Link} to={"/clients"}>Klienci</Nav.Link>
+                                <Nav.Link as={Link} to={"/departments"}>Oddziały</Nav.Link>
                                 <Nav.Link></Nav.Link>
-                                <Nav.Link as={Link} to={"/home"}>Strona główna</Nav.Link>
                                 <Nav.Link as={Link} to={"/about"}>O nas</Nav.Link>
                                 <Nav.Link as={Link} to={"/contact"}>Kontakt</Nav.Link>
                                 <Nav.Link></Nav.Link>
                             </Nav>
-                            <Button variant="outline-secondary" as={Link} to={"/login"}>Zaloguj się</Button>
+                            <Button variant="outline-secondary" as={Link} to={"/login"}>Logowanie</Button>
                         </Navbar.Collapse>
                         
                     </Container>
@@ -50,6 +54,8 @@ export default class NavbarComp extends Component{
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/cars" element={<Cars />} />
                     <Route path="/employees" element={<Employees />} />
+                    <Route path="/clients" element={<Clients />} />
+                    <Route path="/departments" element={<Departments />} />
                     <Route path="/login" element={<Login />} />
                 </Routes>
                 </div>
