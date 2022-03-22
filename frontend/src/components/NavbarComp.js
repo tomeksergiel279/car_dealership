@@ -46,7 +46,7 @@ export default class NavbarComp extends Component{
                     </Container>
                     </Navbar>
                 </div>
-                <div>
+                <div  className="container">
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/home" element={<Home />} />
@@ -57,6 +57,7 @@ export default class NavbarComp extends Component{
                     <Route path="/clients" element={<Clients />} />
                     <Route path="/departments" element={<Departments />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/add-client" element={<Login />} />
                 </Routes>
                 </div>
             </Router>  
