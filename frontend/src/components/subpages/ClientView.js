@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import ClientService from '../services/ClientService';
+import React, { Component } from 'react'
+import ClientService from '../services/ClientService'
+import { Button } from 'react-bootstrap'
 
 class ClientView extends Component {
-
     constructor(props) {
         super(props)
 
@@ -17,7 +17,11 @@ class ClientView extends Component {
             this.setState({client: res.data});
         })
     }
-    
+
+    cancel(){
+        this.props.history.push('/clients');
+    }
+
     render() {
         return (
             <div>
@@ -38,11 +42,11 @@ class ClientView extends Component {
                             <div> { this.state.client.email }</div>
                         </div>
                     </div>
-
+                    <Button size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Powrót</Button>
                 </div>
             </div>
         )
     }
 }
 
-export default ClientView;
+export default ClientView
