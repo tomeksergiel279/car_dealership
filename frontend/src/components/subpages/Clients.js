@@ -10,6 +10,18 @@ class Clients extends Component {
                 clients: []
         }
         this.addClient = this.addClient.bind(this);
+        this.editClient = this.editClient.bind(this);
+        this.deleteClient = this.deleteClient.bind(this);
+    }
+
+    deleteClient(id){
+        ClientService.deleteClient(id).then( res => {
+            this.setState({clients: this.state.clients.filter(client => client.id !== id)});
+        });
+    }
+
+    editClient(id){
+        this.props.history.push(`update-client/${id}`);
     }
 
     componentDidMount(){
@@ -54,7 +66,7 @@ class Clients extends Component {
                                          <td> {client.postalCode} </td>
                                          <td> {client.address} </td>
                                          <td>
-                                            <Button size="sm" variant="secondary" type="submit">Modyfikuj</Button> 
+                                            <Button onClick = { () => this.editClient(client.id)} size="sm" variant="secondary" type="submit">Modyfikuj</Button> 
                                             <Button style={{marginLeft: "10px"}} size="sm" variant="danger" type="submit">Usuń</Button> 
                                          </td>
                                     </tr>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Nav, Container, Navbar } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 
 import Employees from './subpages/Employees';
 import EmployeeForm from './forms/EmployeeForm';
 import Clients from './subpages/Clients';
 import ClientForm from './forms/ClientForm';
+import ClientFormUpdate from './forms/ClientFormUpdate';
 import Home from './subpages/Home';
 import About from './subpages/About';
 import Cars from './subpages/Cars';
@@ -13,12 +14,13 @@ import Contact from './subpages/Contact';
 import Departments from './subpages/Departments';
 import Login from './Login';
 
+
 class NavbarComp extends Component {
     render() {
         return (
-            <div id="container">
+            <div>
                 <Navbar bg="dark" expand="lg" variant="dark">
-                <Container>
+                <div className='container'>
                     <Navbar.Brand href="/">Wypożyczalnia</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -36,7 +38,7 @@ class NavbarComp extends Component {
                         <Nav.Link href="/login">Login</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
-                </Container>
+                </div>
                 </Navbar>
                 <Router>
                     <div className="container">
@@ -47,6 +49,7 @@ class NavbarComp extends Component {
                             <Route path = "/add-employee" component = {EmployeeForm}></Route>
                             <Route path = "/clients" component = {Clients}></Route>
                             <Route path = "/add-client" component = {ClientForm}></Route>
+                            <Route path = "/update-client/:id" component = {ClientFormUpdate}></Route>
                             <Route path = "/cars" component = {Cars}></Route>
                             <Route path = "/departments" component = {Departments}></Route>
                             <Route path = "/about" component = {About}></Route>

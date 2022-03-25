@@ -8,7 +8,7 @@ class Login extends Component {
         return (
             <>
                 <div className="Login" >
-                <h1 className="LoginHeader">Logowanie</h1>
+                <h2 className="LoginHeader">Logowanie</h2>
                     <Form onSubmit={this.handleSubmit} >
 
                         <Form.Group controlId="login" size="lg">
