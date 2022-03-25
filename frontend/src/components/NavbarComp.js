@@ -1,66 +1,63 @@
-import React, { Component } from "react";
-import { Nav, Navbar, Container, Button } from "react-bootstrap";
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Link
-} from "react-router-dom";
-import About from "./subpages/About";
-import Home from "./subpages/Home";
-import Contact from "./subpages/Contact";
-import Login from "./Login";
-import Cars from "./subpages/Cars";
-import Employees from "./subpages/Employees";
-import Clients from "./subpages/Clients";
-import Departments from "./subpages/Departments";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Nav, Container, Navbar } from 'react-bootstrap';
 
+import Employees from './subpages/Employees';
+import EmployeeForm from './forms/EmployeeForm';
+import Clients from './subpages/Clients';
+import ClientForm from './forms/ClientForm';
+import Home from './subpages/Home';
+import About from './subpages/About';
+import Cars from './subpages/Cars';
+import Contact from './subpages/Contact';
+import Departments from './subpages/Departments';
+import Login from './Login';
 
-
-
-export default class NavbarComp extends Component{
+class NavbarComp extends Component {
     render() {
         return (
-            <Router>
-                <div>
-                    <Navbar bg="dark" variant={"dark"} expand="lg">
-                    <Container>
-                        <Navbar.Brand href="/home">Wypożyczalnia</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto">
-                                <Nav.Link></Nav.Link>
-                                <Nav.Link as={Link} to={"/home"}>Strona główna</Nav.Link>
-                                <Nav.Link as={Link} to={"/cars"}>Samochody</Nav.Link>
-                                <Nav.Link as={Link} to={"/employees"}>Pracownicy</Nav.Link>
-                                <Nav.Link as={Link} to={"/clients"}>Klienci</Nav.Link>
-                                <Nav.Link as={Link} to={"/departments"}>Oddziały</Nav.Link>
-                                <Nav.Link></Nav.Link>
-                                <Nav.Link as={Link} to={"/about"}>O nas</Nav.Link>
-                                <Nav.Link as={Link} to={"/contact"}>Kontakt</Nav.Link>
-                                <Nav.Link></Nav.Link>
-                            </Nav>
-                            <Button variant="outline-secondary" as={Link} to={"/login"}>Logowanie</Button>
-                        </Navbar.Collapse>
-                        
-                    </Container>
-                    </Navbar>
-                </div>
-                <div  className="container">
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/cars" element={<Cars />} />
-                    <Route path="/employees" element={<Employees />} />
-                    <Route path="/clients" element={<Clients />} />
-                    <Route path="/departments" element={<Departments />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/add-client" element={<Login />} />
-                </Routes>
-                </div>
-            </Router>  
+            <div id="container">
+                <Navbar bg="dark" expand="lg" variant="dark">
+                <Container>
+                    <Navbar.Brand href="/">Wypożyczalnia</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link></Nav.Link>
+                        <Nav.Link href="/home">Strona główna</Nav.Link>
+                        <Nav.Link href="/cars">Samochody</Nav.Link>
+                        <Nav.Link href="/clients">Klienci</Nav.Link> 
+                        <Nav.Link href="/employees">Pracownicy</Nav.Link>  
+                        <Nav.Link href="/departments">Oddziały</Nav.Link>
+                        <Nav.Link></Nav.Link>
+                        <Nav.Link href="/about">O nas</Nav.Link>
+                        <Nav.Link href="/contact">Kontakt</Nav.Link>
+                        <Nav.Link></Nav.Link>
+                        <Nav.Link href="/login">Login</Nav.Link>
+                    </Nav>
+                    </Navbar.Collapse>
+                </Container>
+                </Navbar>
+                <Router>
+                    <div className="container">
+                        <Switch> 
+                            <Route path = "/" exact component = {Home}></Route>
+                            <Route path = "/home" component = {Home}></Route>
+                            <Route path = "/employees" component = {Employees}></Route>
+                            <Route path = "/add-employee" component = {EmployeeForm}></Route>
+                            <Route path = "/clients" component = {Clients}></Route>
+                            <Route path = "/add-client" component = {ClientForm}></Route>
+                            <Route path = "/cars" component = {Cars}></Route>
+                            <Route path = "/departments" component = {Departments}></Route>
+                            <Route path = "/about" component = {About}></Route>
+                            <Route path = "/contact" component = {Contact}></Route>
+                            <Route path = "/login" component = {Login}></Route>
+                        </Switch>
+                    </div>
+                </Router>
+            </div>
         );
     }
 }
+
+export default NavbarComp;
