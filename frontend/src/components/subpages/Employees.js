@@ -24,7 +24,7 @@ class Employees extends Component {
 
     render() {
         return (
-            <div>
+            <div><br />
                 <h2 className="text-center">Lista Pracowników</h2>
                 <br></br>
                 <div className = "row">

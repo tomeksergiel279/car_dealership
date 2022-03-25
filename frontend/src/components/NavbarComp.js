@@ -6,7 +6,7 @@ import Employees from './subpages/Employees';
 import EmployeeForm from './forms/EmployeeForm';
 import Clients from './subpages/Clients';
 import ClientForm from './forms/ClientForm';
-import ClientFormUpdate from './forms/ClientFormUpdate';
+import ClientView from './subpages/ClientView';
 import Home from './subpages/Home';
 import About from './subpages/About';
 import Cars from './subpages/Cars';
@@ -48,8 +48,8 @@ class NavbarComp extends Component {
                             <Route path = "/employees" component = {Employees}></Route>
                             <Route path = "/add-employee" component = {EmployeeForm}></Route>
                             <Route path = "/clients" component = {Clients}></Route>
-                            <Route path = "/add-client" component = {ClientForm}></Route>
-                            <Route path = "/update-client/:id" component = {ClientFormUpdate}></Route>
+                            <Route path = "/add-client/:id" component = {ClientForm}></Route>
+                            <Route path = "/view-client" component = {ClientView}></Route>
                             <Route path = "/cars" component = {Cars}></Route>
                             <Route path = "/departments" component = {Departments}></Route>
                             <Route path = "/about" component = {About}></Route>

@@ -9,6 +9,7 @@ class ClientForm extends Component {
         super(props)
 
         this.state = {
+            id: this.props.match.params.id,
             firstName: '',
             lastName: '',
             email: '',
@@ -25,18 +26,44 @@ class ClientForm extends Component {
         this.changePasswordHandler = this.changePasswordHandler.bind(this);
         this.changePostalCodeHandler = this.changePostalCodeHandler.bind(this);
         this.changeAddressHandler = this.changeAddressHandler.bind(this);
-        this.saveClient = this.saveClient.bind(this);
+        this.saveOrUpdateClient = this.saveOrUpdateClient.bind(this);
     }
 
-    saveClient = (e) => {
+    componentDidMount(){
+        if(this.state.id === '_add'){
+            return
+        }else{
+            ClientService.GetClientById(this.state.id).then( (res) =>{
+                let client = res.data;
+                this.setState({
+                    firstName: client.firstName,
+                    lastName: client.lastName,
+                    email: client.email,
+                    login: client.login,
+                    password: client.password,
+                    postalCode: client.postalCode,
+                    address: client.address
+                    
+                });
+            });
+        }        
+    }
+
+    saveOrUpdateClient = (e) => {
         e.preventDefault();
         let client = {firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email,
             login: this.state.login, password: this.state.password, postalCode: this.state.postalCode, address: this.state.address};
         console.log('client => ' + JSON.stringify(client));
 
-        ClientService.createClient(client).then(res => {
-            this.props.history.push('/clients');
-        });
+        if(this.state.id === '_add'){
+            ClientService.createClient(client).then(res =>{
+                this.props.history.push('/clients');
+            });
+        }else{
+            ClientService.updateClient(client, this.state.id).then( res => {
+                this.props.history.push('/clients');
+            });
+        }
     }
 
     changeFirstNameHandler = (event) => {
@@ -68,7 +95,15 @@ class ClientForm extends Component {
     }
 
     cancel(){
-        this.props.history.push('clients');
+        this.props.history.push('/clients');
+    }
+
+    getTitle(){
+        if(this.state.id === '_add'){
+            return <h2 className="text-center">Dodaj Klienta</h2>
+        }else{
+            return <h2 className="text-center">Zmodyfikuj Klienta</h2>
+        }
     }
 
     render() {
@@ -76,7 +111,7 @@ class ClientForm extends Component {
             <div>
                 <div className='forms'>
                             <form>
-                                <h2 className='text-center'>Dodawanie Klienta</h2>
+                                {this.getTitle()}
                                 <div className = "form-group">
                                             <label> Imię </label>
                                             <input name="firstName" className="form-control" 
@@ -114,7 +149,7 @@ class ClientForm extends Component {
                                         </div><br />
 
                                         
-                                        <Button size="md" variant="secondary" type="submit" onClick={this.saveClient}>Zapisz</Button>  
+                                        <Button size="md" variant="secondary" type="submit" onClick={this.saveOrUpdateClient}>Zapisz</Button>  
                                         <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Anuluj</Button>                          
                                 </form>
                             </div>  

@@ -21,7 +21,11 @@ class Clients extends Component {
     }
 
     editClient(id){
-        this.props.history.push(`update-client/${id}`);
+        this.props.history.push(`add-client/${id}`);
+    }
+
+    viewClient(id){
+        this.props.history.push(`/view-client/${id}`);
     }
 
     componentDidMount(){
@@ -31,12 +35,12 @@ class Clients extends Component {
     }
 
     addClient(){
-        this.props.history.push('/add-client');
+        this.props.history.push('/add-client/_add');
     }
 
     render() {
         return (
-            <div>
+            <div><br />
                 <h2 className="text-center">Lista Klientów</h2>
                 <br></br>
                 <div className = "row">
@@ -67,7 +71,8 @@ class Clients extends Component {
                                          <td> {client.address} </td>
                                          <td>
                                             <Button onClick = { () => this.editClient(client.id)} size="sm" variant="secondary" type="submit">Modyfikuj</Button> 
-                                            <Button style={{marginLeft: "10px"}} size="sm" variant="danger" type="submit">Usuń</Button> 
+                                            <Button style={{marginLeft: "10px"}} onClick = { () => this.deleteClient(client.id)}  size="sm" variant="danger" type="submit">Usuń</Button> 
+                                            <Button style={{marginLeft: "10px"}} onClick = { () => this.viewClient(client.id)} size="sm" variant="primary" type="submit">Zobacz</Button> 
                                          </td>
                                     </tr>
                                 )

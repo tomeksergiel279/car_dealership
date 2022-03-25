@@ -70,7 +70,7 @@ class EmployeeForm extends Component {
             <div>
                 <div className='forms'>
                             <form>
-                                <h2 className='text-center'>Dodawanie Pracownika</h2>
+                                <h2 className='text-center'>Dodaj Pracownika</h2>
                                 <div className = "form-group">
                                             <label> Imię </label>
                                             <input name="firstName" className="form-control" 
