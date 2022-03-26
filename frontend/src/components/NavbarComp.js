@@ -6,9 +6,8 @@ import Employees from './subpages/Employees';
 import EmployeeForm from './forms/EmployeeForm';
 import Clients from './subpages/Clients';
 import ClientForm from './forms/ClientForm';
-import ClientView from './subpages/ClientView';
+import ClientView from './forms/ClientView';
 import Home from './subpages/Home';
-import About from './subpages/About';
 import Cars from './subpages/Cars';
 import Contact from './subpages/Contact';
 import Departments from './subpages/Departments';
@@ -32,7 +31,6 @@ class NavbarComp extends Component {
                         <Nav.Link href="/employees">Pracownicy</Nav.Link>  
                         <Nav.Link href="/departments">Oddziały</Nav.Link>
                         <Nav.Link></Nav.Link>
-                        <Nav.Link href="/about">O nas</Nav.Link>
                         <Nav.Link href="/contact">Kontakt</Nav.Link>
                         <Nav.Link></Nav.Link>
                         <Nav.Link href="/login">Login</Nav.Link>
@@ -52,7 +50,6 @@ class NavbarComp extends Component {
                             <Route path = "/view-client/:id" component = {ClientView}></Route>
                             <Route path = "/cars" component = {Cars}></Route>
                             <Route path = "/departments" component = {Departments}></Route>
-                            <Route path = "/about" component = {About}></Route>
                             <Route path = "/contact" component = {Contact}></Route>
                             <Route path = "/login" component = {Login}></Route>
                         </Switch>

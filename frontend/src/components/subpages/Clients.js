@@ -41,8 +41,7 @@ class Clients extends Component {
     render() {
         return (
             <div><br />
-                <h2 className="text-center">Lista Klientów</h2>
-                <br></br>
+                <h2 className="text-center">Lista Klientów</h2><br />     
                 <div className = "row">
                     <table className = "table table-striped table-bordered">
                         <thead>
@@ -53,7 +52,7 @@ class Clients extends Component {
                                 <th> Login </th>
                                 <th> Hasło </th>
                                 <th> Kod pocztowy </th>
-                                <th> Address </th>
+                                <th> Adres </th>
                                 <th></th>
                             </tr>
                         </thead>
