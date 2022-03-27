@@ -79,8 +79,7 @@ class Clients extends Component {
                         </tbody>
                     </table>
                 </div>
-                <Button onClick={this.addClient} size="lg" variant="dark" type="submit">Dodaj Klienta</Button> 
-                                        
+                <Button onClick={this.addClient} size="lg" variant="dark" type="submit">Dodaj Klienta</Button>                        
             </div>
         )
     }

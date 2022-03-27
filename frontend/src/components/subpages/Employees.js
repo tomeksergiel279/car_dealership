@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
 import EmployeeService from '../services/EmployeeService';
+import { Button } from 'react-bootstrap';
 
 class Employees extends Component {
     constructor(props) {
@@ -10,23 +10,40 @@ class Employees extends Component {
                 employees: []
         }
         this.addEmployee = this.addEmployee.bind(this);
+        this.editEmployee = this.editEmployee.bind(this);
+        this.deleteEmployee = this.deleteEmployee.bind(this);
+    }
+
+    deleteEmployee(id){
+        EmployeeService.deleteEmployee(id).then( res => {
+            this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
+        });
+    }
+
+    editEmployee(id){
+        this.props.history.push(`add-employee/${id}`);
+    }
+
+    viewEmployee(id){
+        this.props.history.push(`/view-employee/${id}`);
     }
 
     componentDidMount(){
-        EmployeeService.getEmployees().then((res) => {
+        EmployeeService.getEmployee().then((res) => {
             this.setState({ employees: res.data});
         });
     }
 
     addEmployee(){
-        this.props.history.push('/add-employee');
+        this.props.history.push('/add-employee/_add');
     }
+
+
 
     render() {
         return (
             <div><br />
-                <h2 className="text-center">Lista Pracowników</h2>
-                <br></br>
+                <h2 className="text-center">Lista Pracowników</h2><br />     
                 <div className = "row">
                     <table className = "table table-striped table-bordered">
                         <thead>
@@ -36,12 +53,12 @@ class Employees extends Component {
                                 <th> Email </th>
                                 <th> Login </th>
                                 <th> Hasło </th>
-                                <th> Numer telefonu </th>
+                                <th> Numer Telefonu </th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {
+                        {
                                 this.state.employees.map(
                                     employee => 
                                     <tr key = {employee.id}>
@@ -51,18 +68,13 @@ class Employees extends Component {
                                          <td> {employee.login} </td>   
                                          <td> {employee.password} </td>
                                          <td> {employee.phoneNumber} </td>
-                                         <td>
-                                            <Button size="sm" variant="secondary" type="submit">Modyfikuj</Button> 
-                                            <Button style={{marginLeft: "10px"}} size="sm" variant="danger" type="submit">Usuń</Button> 
-                                         </td>
                                     </tr>
                                 )
-                            }
+                        }                  
                         </tbody>
                     </table>
                 </div>
-                <Button onClick={this.addEmployee} size="lg" variant="dark" type="submit">Dodaj Pracownika</Button> 
-                                        
+                       
             </div>
         )
     }

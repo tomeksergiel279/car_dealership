@@ -3,7 +3,8 @@ import CarService from '../services/CarService';
 import { Button, Card, Table } from 'react-bootstrap';
 
 import '../Form.css';
-
+import audia4 from './../../images/audia4.png'
+import aklasa from './../../images/aklasa.png'
 
 class Cars extends Component {
     constructor(props) {
@@ -12,11 +13,16 @@ class Cars extends Component {
         this.state = {
                 cars: []
         }
+        this.openBooklet = this.openBooklet.bind(this);
     }
     componentDidMount(){
         CarService.getCars().then((res) => {
             this.setState({ cars: res.data});
         });
+    }
+
+    openBooklet(id){
+        this.props.history.push(`booklet/${id}`);
     }
 
     render() {
@@ -27,7 +33,7 @@ class Cars extends Component {
                             car => 
                                 <Card key = {car.id} border="secondary" className='cards'>
                                      <Card.Header><h3>{ car.mark } { car.model }</h3></Card.Header>
-                                     <Card.Img variant="top" src={car.img} />
+                                     <Card.Img variant="top" src={aklasa} />
                                      <Card.Body>
                                         <Table>
                                             <tbody>
@@ -47,11 +53,15 @@ class Cars extends Component {
                                                     <td>Cena</td>
                                                     <td>{car.color}</td>
                                                 </tr>
-
+                                                <tr>
+                                                    <td colSpan={2}><Button onClick = { () => this.openBooklet(car.serviceBooklet.id)} size="md" variant="dark" type="submit">Książka serwisowa</Button></td>
+                                                </tr>
                                             </tbody>
                                         </Table>
+                                        
                                     </Card.Body>
-                                </Card>      
+                                </Card>  
+                                    
                         )
                     }
             </div>

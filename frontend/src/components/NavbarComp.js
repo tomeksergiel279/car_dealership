@@ -11,6 +11,7 @@ import Home from './subpages/Home';
 import Cars from './subpages/Cars';
 import Contact from './subpages/Contact';
 import Departments from './subpages/Departments';
+import Booklet from './subpages/Booklet';
 import Login from './Login';
 
 
@@ -48,6 +49,7 @@ class NavbarComp extends Component {
                             <Route path = "/clients" component = {Clients}></Route>
                             <Route path = "/add-client/:id" component = {ClientForm}></Route>
                             <Route path = "/view-client/:id" component = {ClientView}></Route>
+                            <Route path = "/booklet/:id" component = {Booklet}></Route>
                             <Route path = "/cars" component = {Cars}></Route>
                             <Route path = "/departments" component = {Departments}></Route>
                             <Route path = "/contact" component = {Contact}></Route>

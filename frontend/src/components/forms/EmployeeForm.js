@@ -101,8 +101,6 @@ class EmployeeForm extends Component {
                                             <input name="password" className="form-control" 
                                                 value={this.state.phoneNumber} onChange={this.changePhoneNumberHandler}/>
                                         </div><br />
-                                        
-                                        
                                         <Button size="md" variant="secondary" type="submit" onClick={this.saveEmployee}>Zapisz</Button>  
                                         <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Anuluj</Button>                          
                                 </form>

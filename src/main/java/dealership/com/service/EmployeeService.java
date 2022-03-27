@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/employee")
 public class EmployeeService {
@@ -32,17 +33,13 @@ public class EmployeeService {
     }
 
     @PostMapping
-    public Employee addEmployee(@RequestBody Employee employee, @RequestHeader("name") String name) {
-
-        Department department = departmentRepository.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException("Department not exist with name:" + name));
+    public Employee addEmployee(@RequestBody Employee employee) {
 
         Optional<Employee> employeeFromDB = employeeRepository.findByLogin(employee.getLogin());
 
         if(employeeFromDB.isPresent()){
             throw new ResourceAlreadyExist("Employee already exist with login: "+ employee.getLogin());
         }
-        employee.setDepartment_employee(department);
         return employeeRepository.save(employee);
     }
 
@@ -55,16 +52,16 @@ public class EmployeeService {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Employee> updateClient(@PathVariable long id,@RequestBody Client client) {
+    public ResponseEntity<Employee> updateClient(@PathVariable long id,@RequestBody Employee employee) {
         Employee updateEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
 
-        updateEmployee.setLogin(client.getLogin());
-        updateEmployee.setPassword(client.getPassword());
-        updateEmployee.setEmail(client.getEmail());
-        updateEmployee.setFirstName(client.getFirstName());
-        updateEmployee.setLastName(client.getLastName());
-        updateEmployee.setPhoneNumber(client.getPhoneNumber());
+        updateEmployee.setLogin(employee.getLogin());
+        updateEmployee.setPassword(employee.getPassword());
+        updateEmployee.setEmail(employee.getEmail());
+        updateEmployee.setFirstName(employee.getFirstName());
+        updateEmployee.setLastName(employee.getLastName());
+        updateEmployee.setPhoneNumber(employee.getPhoneNumber());
 
         employeeRepository.save(updateEmployee);
 

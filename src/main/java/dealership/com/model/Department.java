@@ -30,10 +30,6 @@ public class Department {
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
 
-    //jeden oddział może posiadać wielu pracowników
-    @OneToMany(mappedBy = "department_employee")
-    private Set<Employee> employees = new HashSet<>();
-
     //jeden oddział może posiadać wiele zakupów
     @JsonBackReference
     @OneToMany(mappedBy = "department_buy")

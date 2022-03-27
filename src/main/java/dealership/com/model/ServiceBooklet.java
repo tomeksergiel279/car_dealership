@@ -27,7 +27,7 @@ public class ServiceBooklet {
     private Car car_booklet;
 
     @Column(name = "service_inspection")
-    private Date serviceInspection;
+    private String serviceInspection;
 
     @Column(name = "last_repair")
     private String lastRepair;

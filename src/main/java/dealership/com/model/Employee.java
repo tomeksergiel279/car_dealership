@@ -1,9 +1,12 @@
 package dealership.com.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,12 +20,6 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    //jeden oddział może posiadać wielu pracowników
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "department_id", referencedColumnName = "id", nullable = false)
-    private Department department_employee;
 
     @Column(name = "login", nullable = false, unique = true)
     private String login;
@@ -41,5 +38,10 @@ public class Employee {
 
     @Column(name = "phone_number", nullable = false)
     private int phoneNumber;
+
+    //jeden pracownik może posiadać wiele zakupów
+    @JsonBackReference
+    @OneToMany(mappedBy = "employee")
+    private Set<Buy> buys = new HashSet<>();
 
 }
