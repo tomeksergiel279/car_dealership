@@ -9,11 +9,11 @@ class BookletService {
     }
 
     createBooklet(booklet,vin){
-        return axios.post(BOOKLET_API_BASE_URL, booklet, {
+        return axios.post(BOOKLET_API_BASE_URL, booklet,{
             headers: {
                 'vin': vin
             }
-        });
+        })
     }
 
     getBookletById(bookletId){

@@ -61,10 +61,9 @@ class CarForm extends Component {
         console.log('booklet => ' + JSON.stringify(booklet));
 
         if(this.state.id === '_add'){
-            CarService.createCar(car);
-            
-            BookletService.createBooklet(booklet,this.state.vin).then(res =>{
+            CarService.createCar(car).then(res =>{
                 this.props.history.push('/cars');
+                BookletService.createBooklet(booklet,this.state.vin);
             });
         }else{
             CarService.updateCar(car, this.state.id).then( res => {

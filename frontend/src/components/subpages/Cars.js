@@ -68,7 +68,7 @@ class Cars extends Component {
                                                 </tr>
                                                 <tr>
                                                     <td>Cena</td>
-                                                    <td>{car.color}</td>
+                                                    <td>{car.price}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Dostępność</td>
