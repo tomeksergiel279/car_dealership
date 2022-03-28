@@ -11,6 +11,10 @@ class BookletService {
     getBookletById(bookletId){
         return axios.get(BOOKLET_API_BASE_URL + '/' + bookletId);
     }
+
+    updateBooklet(booklet, bookletId){
+        return axios.put(BOOKLET_API_BASE_URL + '/' + bookletId, booklet);
+    }
   
 }
 

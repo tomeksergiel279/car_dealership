@@ -11,12 +11,18 @@ class Booklet extends Component {
             id: this.props.match.params.id,
             booklet: {}
         }
+
+        this.editBooklet = this.editBooklet.bind(this);
     }
 
     componentDidMount(){
         BookletService.getBookletById(this.state.id).then( res => {
             this.setState({booklet: res.data});
         })
+    }
+
+    editBooklet(id){
+        this.props.history.push(`/update-booklet/${id}`);
     }
 
     cancel(){
@@ -42,7 +48,8 @@ class Booklet extends Component {
                     
                         </tbody> 
                     </Table>
-                    <Button size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Powrót</Button>
+                    <Button onClick = { () => this.editBooklet(this.state.booklet.id)} size="md" variant="secondary" type="submit">Modyfikuj</Button>
+                    <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Powrót</Button>
                 </Card.Body>
             </Card>
             </div>
