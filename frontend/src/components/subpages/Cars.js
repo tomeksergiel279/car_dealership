@@ -12,7 +12,11 @@ class Cars extends Component {
                 cars: []
         }
         this.openBooklet = this.openBooklet.bind(this);
+        this.addCar = this.addCar.bind(this);
+        this.editCar = this.editCar.bind(this);
+        this.deleteCar = this.deleteCar.bind(this);
     }
+
     componentDidMount(){
         CarService.getCars().then((res) => {
             this.setState({ cars: res.data});
@@ -23,9 +27,24 @@ class Cars extends Component {
         this.props.history.push(`booklet/${id}`);
     }
 
+    addCar(){
+        this.props.history.push('/add-car/_add');
+    }
+
+    editCar(id){
+        this.props.history.push(`add-car/${id}`);
+    }
+
+    deleteCar(id){
+        CarService.deleteCar(id).then( res => {
+            this.setState({cars: this.state.cars.filter(car => car.id !== id)});
+        });
+    }
+
     render() {
         return (
             <div><br />
+                    <Button onClick={this.addCar} size="lg" variant="dark" type="submit">Dodaj Samochód</Button> 
                     {
                         this.state.cars.map(
                             car => 
@@ -56,11 +75,12 @@ class Cars extends Component {
                                                     <td>{car.available}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td colSpan={2}><Button onClick = { () => this.openBooklet(car.serviceBooklet.id)} size="md" variant="dark" type="submit">Książka serwisowa</Button></td>
+                                                    <td colSpan={2}><Button onClick = { () => this.openBooklet(car.serviceBooklet.id)} size="md" variant="primary" type="submit">Książka serwisowa</Button></td>
                                                 </tr>
                                             </tbody>
                                         </Table>
-                                        
+                                            <Button onClick = { () => this.editCar(car.id)} size="md" variant="secondary" type="submit">Modyfikuj</Button> 
+                                            <Button style={{marginLeft: "10px"}} onClick = { () => this.deleteCar(car.id)}  size="md" variant="danger" type="submit">Usuń</Button> 
                                     </Card.Body>
                                 </Card>        
                         )

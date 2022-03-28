@@ -44,7 +44,7 @@ public class ServiceBoolketService {
     public ServiceBooklet addServiceBooklet(@RequestBody ServiceBooklet serviceBooklet, @RequestHeader("vin") String vin) {
 
         Car car = carRepository.findByVin(vin)
-                .orElseThrow(() -> new ResourceNotFoundException("Department not exist with vin:" + vin));
+                .orElseThrow(() -> new ResourceNotFoundException("Car not exist with vin:" + vin));
 
         serviceBooklet.setCar_booklet(car);
         return serviceBookletRepository.save(serviceBooklet);

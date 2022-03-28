@@ -12,6 +12,7 @@ class Clients extends Component {
         this.addClient = this.addClient.bind(this);
         this.editClient = this.editClient.bind(this);
         this.deleteClient = this.deleteClient.bind(this);
+        this.viewClient = this.viewClient.bind(this);
     }
 
     deleteClient(id){

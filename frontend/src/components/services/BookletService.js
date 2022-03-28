@@ -8,6 +8,14 @@ class BookletService {
         return axios.get(BOOKLET_API_BASE_URL);
     }
 
+    createBooklet(booklet,vin){
+        return axios.post(BOOKLET_API_BASE_URL, booklet, {
+            headers: {
+                'vin': vin
+            }
+        });
+    }
+
     getBookletById(bookletId){
         return axios.get(BOOKLET_API_BASE_URL + '/' + bookletId);
     }
