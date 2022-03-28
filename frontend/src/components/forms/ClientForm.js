@@ -16,7 +16,8 @@ class ClientForm extends Component {
             login: '',
             password: '',
             postalCode: '',
-            address: ''
+            address: '',
+            phoneNumber: ''
         }
 
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
@@ -26,6 +27,7 @@ class ClientForm extends Component {
         this.changePasswordHandler = this.changePasswordHandler.bind(this);
         this.changePostalCodeHandler = this.changePostalCodeHandler.bind(this);
         this.changeAddressHandler = this.changeAddressHandler.bind(this);
+        this.changePhoneNumberHandler = this.changePhoneNumberHandler.bind(this);
         this.saveOrUpdateClient = this.saveOrUpdateClient.bind(this);
     }
 
@@ -42,7 +44,8 @@ class ClientForm extends Component {
                     login: client.login,
                     password: client.password,
                     postalCode: client.postalCode,
-                    address: client.address
+                    address: client.address,
+                    phoneNumber: client.phoneNumber
                     
                 });
             });
@@ -52,7 +55,7 @@ class ClientForm extends Component {
     saveOrUpdateClient = (e) => {
         e.preventDefault();
         let client = {firstName: this.state.firstName, lastName: this.state.lastName, email: this.state.email,
-            login: this.state.login, password: this.state.password, postalCode: this.state.postalCode, address: this.state.address};
+            login: this.state.login, password: this.state.password, postalCode: this.state.postalCode, address: this.state.address, phoneNumber: this.state.phoneNumber};
         console.log('client => ' + JSON.stringify(client));
 
         if(this.state.id === '_add'){
@@ -92,6 +95,10 @@ class ClientForm extends Component {
 
     changeAddressHandler = (event) => {
         this.setState({address: event.target.value});
+    }
+
+    changePhoneNumberHandler = (event) => {
+        this.setState({phoneNumber: event.target.value});
     }
 
     cancel(){
@@ -146,9 +153,12 @@ class ClientForm extends Component {
                                             <label> Adres </label>
                                             <input name="address" className="form-control" 
                                                 value={this.state.address} onChange={this.changeAddressHandler}/>
+                                        </div>
+                                        <div className = "form-group">
+                                            <label> Numer telefonu </label>
+                                            <input name="phoneNumber" className="form-control" 
+                                                value={this.state.phoneNumber} onChange={this.changePhoneNumberHandler}/>
                                         </div><br />
-
-                                        
                                         <Button size="md" variant="secondary" type="submit" onClick={this.saveOrUpdateClient}>Zapisz</Button>  
                                         <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Anuluj</Button>                          
                                 </form>

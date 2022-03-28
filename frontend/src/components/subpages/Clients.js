@@ -53,6 +53,7 @@ class Clients extends Component {
                                 <th> Hasło </th>
                                 <th> Kod pocztowy </th>
                                 <th> Adres </th>
+                                <th> Numer Telefonu </th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -68,6 +69,7 @@ class Clients extends Component {
                                          <td> {client.password} </td>
                                          <td> {client.postalCode} </td>
                                          <td> {client.address} </td>
+                                         <td> {client.phoneNumber} </td>
                                          <td>
                                             <Button onClick = { () => this.editClient(client.id)} size="sm" variant="secondary" type="submit">Modyfikuj</Button> 
                                             <Button style={{marginLeft: "10px"}} onClick = { () => this.deleteClient(client.id)}  size="sm" variant="danger" type="submit">Usuń</Button> 

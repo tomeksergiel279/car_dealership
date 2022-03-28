@@ -68,13 +68,18 @@ class Employees extends Component {
                                          <td> {employee.login} </td>   
                                          <td> {employee.password} </td>
                                          <td> {employee.phoneNumber} </td>
+                                         <td>
+                                            <Button onClick = { () => this.editEmployee(employee.id)} size="sm" variant="secondary" type="submit">Modyfikuj</Button> 
+                                            <Button style={{marginLeft: "10px"}} onClick = { () => this.deleteEmployee(employee.id)}  size="sm" variant="danger" type="submit">Usuń</Button> 
+                                            <Button style={{marginLeft: "10px"}} onClick = { () => this.viewEmployee(employee.id)} size="sm" variant="primary" type="submit">Zobacz</Button>
+                                         </td>
                                     </tr>
                                 )
                         }                  
                         </tbody>
                     </table>
                 </div>
-                       
+                <Button onClick={this.addEmployee} size="lg" variant="dark" type="submit">Dodaj Pracownika</Button>         
             </div>
         )
     }

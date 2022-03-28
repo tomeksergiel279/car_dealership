@@ -56,6 +56,7 @@ public class CarService {
         updateCar.setColor(car.getColor());
         updateCar.setProductionYear(car.getProductionYear());
         updateCar.setPrice(car.getPrice());
+        updateCar.setAvailable(car.getAvailable());
 
         carRepository.save(updateCar);
 

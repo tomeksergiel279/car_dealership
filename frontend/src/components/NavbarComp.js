@@ -4,6 +4,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 
 import Employees from './subpages/Employees';
 import EmployeeForm from './forms/EmployeeForm';
+import EmployeeView from './forms/EmployeeView';
 import Clients from './subpages/Clients';
 import ClientForm from './forms/ClientForm';
 import ClientView from './forms/ClientView';
@@ -45,7 +46,8 @@ class NavbarComp extends Component {
                             <Route path = "/" exact component = {Home}></Route>
                             <Route path = "/home" component = {Home}></Route>
                             <Route path = "/employees" component = {Employees}></Route>
-                            <Route path = "/add-employee" component = {EmployeeForm}></Route>
+                            <Route path = "/add-employee/:id" component = {EmployeeForm}></Route>
+                            <Route path = "/view-employee/:id" component = {EmployeeView}></Route>
                             <Route path = "/clients" component = {Clients}></Route>
                             <Route path = "/add-client/:id" component = {ClientForm}></Route>
                             <Route path = "/view-client/:id" component = {ClientView}></Route>
