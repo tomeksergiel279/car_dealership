@@ -17,7 +17,8 @@ class CarForm extends Component {
             price: '',
             productionYear: '',
             vin: '',
-            available: ''
+            available: '',
+            type: ''
         }
 
         this.changeColorHandler = this.changeColorHandler.bind(this);
@@ -28,6 +29,7 @@ class CarForm extends Component {
         this.changeProductionYearHandler = this.changeProductionYearHandler.bind(this);
         this.changeVinHandler = this.changeVinHandler.bind(this);
         this.changeAvailableHandler = this.changeAvailableHandler.bind(this);
+        this.changeTypeHandler = this.changeTypeHandler.bind(this);
         this.saveOrUpdateCar = this.saveOrUpdateCar.bind(this);
     }
 
@@ -45,7 +47,8 @@ class CarForm extends Component {
                     price: car.price,
                     productionYear: car.productionYear,
                     vin: car.vin,
-                    available: car.available
+                    available: car.available,
+                    type: car.type
                 });
             });
         }        
@@ -54,7 +57,8 @@ class CarForm extends Component {
     saveOrUpdateCar = (e) => {
         e.preventDefault();
         let car = {mark: this.state.mark, model: this.state.model, color: this.state.color,
-            img: this.state.img, price: this.state.price, productionYear: this.state.productionYear, vin: this.state.vin, available: this.state.available};
+            img: this.state.img, price: this.state.price, productionYear: this.state.productionYear, vin: this.state.vin, 
+            available: this.state.available, type: this.state.type};
         console.log('car => ' + JSON.stringify(car));
 
         let booklet = { serviceInspection:"2000-01-01", lastRepair:"brak" }
@@ -102,6 +106,10 @@ class CarForm extends Component {
 
     changeAvailableHandler = (event) => {
         this.setState({available: event.target.value});
+    }
+
+    changeTypeHandler = (event) => {
+        this.setState({type: event.target.value});
     }
 
     cancel(){
@@ -161,6 +169,11 @@ class CarForm extends Component {
                                             <label> Dostępność </label>
                                             <input name="available" className="form-control" 
                                                 value={this.state.available} onChange={this.changeAvailableHandler}/>
+                                        </div>
+                                        <div className = "form-group">
+                                            <label> Rodzaj </label>
+                                            <input name="available" className="form-control" 
+                                                value={this.state.type} onChange={this.changeTypeHandler}/>
                                         </div><br />
                                         <Button size="md" variant="secondary" type="submit" onClick={this.saveOrUpdateCar}>Zapisz</Button>  
                                         <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Anuluj</Button>                          

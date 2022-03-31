@@ -42,6 +42,9 @@ public class Car {
     @Column(name = "available", nullable = false)
     private String available;
 
+    @Column(name = "type", nullable = false)
+    private String type;
+
     //jedna książka dla jednego samochodu
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "car_booklet")
     private ServiceBooklet serviceBooklet;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CarService from '../services/CarService';
-import { Button, Card, Table } from 'react-bootstrap';
+import { Button, Card, Table, Form, Nav} from 'react-bootstrap';
 
 import '../Form.css';
 
@@ -9,7 +9,12 @@ class Cars extends Component {
         super(props)
 
         this.state = {
-                cars: []
+                cars: [],
+                mark: "",
+                available: "",
+                color: "",
+                type: "",
+                price: ""
         }
         this.openBooklet = this.openBooklet.bind(this);
         this.addCar = this.addCar.bind(this);
@@ -41,10 +46,61 @@ class Cars extends Component {
         });
     }
 
+    search(cars){
+        this.setState({cars: this.state.cars.filter(car => (car.available.toLowerCase().indexOf(this.state.available) > -1 
+            && car.mark.toLowerCase().indexOf(this.state.mark) > -1) 
+            && car.type.toLowerCase().indexOf(this.state.type) > -1
+            && car.color.toLowerCase().indexOf(this.state.color) > -1)
+        });
+    }
+
     render() {
         return (
             <div><br />
-                    <Button onClick={this.addCar} size="lg" variant="dark" type="submit">Dodaj Samochód</Button> 
+            <Nav>
+                <Nav.Link style={{width: '20%'}}>
+                    <Form.Select size="sm" value={this.state.mark} onChange={(e) => this.setState({mark: e.target.value})}>
+                        <option>Wybierz markę</option>
+                        <option value="audi">Audi</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="volkswagen">Volkswagen</option>
+                    </Form.Select>
+                </Nav.Link>
+                <Nav.Link  style={{width: '20%'}}>
+                    <Form.Select size="sm" value={this.state.available} onChange={(e) => this.setState({available: e.target.value})}>
+                        <option>Wybierz dostępność</option>
+                        <option value="tak">Tak</option>
+                        <option value="nie">Nie</option>
+                    </Form.Select>
+                </Nav.Link>
+                <Nav.Link  style={{width: '20%'}}>
+                    <Form.Select size="sm" value={this.state.type} onChange={(e) => this.setState({type: e.target.value})}>
+                        <option>Wybierz rodzaj</option>
+                        <option value="osobowe">Osobowe</option>
+                        <option value="dostawcze">Dostawcze</option>
+                    </Form.Select>
+                </Nav.Link>
+                <Nav.Link  style={{width: '20%'}}>
+                    <Form.Select size="sm" value={this.state.color} onChange={(e) => this.setState({color: e.target.value})}>
+                        <option>Wybierz kolor</option>
+                        <option value="czarny">Czarny</option>
+                        <option value="szary">Szary</option>
+                        <option value="biały">Biały</option>
+                        <option value="zielony">Zielony</option>
+                        <option value="czerwony">Czerwony</option>
+                        <option value="niebieski">Niebieski</option>
+                    </Form.Select>
+                </Nav.Link>
+                <Nav.Link style={{width: '20%'}}>
+                    <Form.Select size="sm" value={this.state.price} onChange={(e) => this.setState({price: e.target.value})}>
+                        <option>Wybierz cenę</option>
+                        <option value="10000">10 000</option>
+                        <option value="20000">20 000</option>
+                    </Form.Select>
+                </Nav.Link>
+            </Nav>
+                    <Button  onClick={this.addCar} size="lg" variant="dark" type="submit">Dodaj Samochód</Button>
+                    <Button style={{float: 'right'}} onClick = { () => this.search(this.state.cars)}  size="lg" variant="primary" type="submit">Filtruj</Button> 
                     {
                         this.state.cars.map(
                             car => 
@@ -73,6 +129,10 @@ class Cars extends Component {
                                                 <tr>
                                                     <td>Dostępność</td>
                                                     <td>{car.available}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rodzaj</td>
+                                                    <td>{car.type}</td>
                                                 </tr>
                                                 <tr>
                                                     <td colSpan={2}><Button onClick = { () => this.openBooklet(car.serviceBooklet.id)} size="md" variant="primary" type="submit">Książka serwisowa</Button></td>
