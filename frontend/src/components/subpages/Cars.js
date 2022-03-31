@@ -10,6 +10,7 @@ class Cars extends Component {
 
         this.state = {
                 cars: [],
+                searchCars: [],
                 mark: "",
                 available: "",
                 color: "",
@@ -20,11 +21,12 @@ class Cars extends Component {
         this.addCar = this.addCar.bind(this);
         this.editCar = this.editCar.bind(this);
         this.deleteCar = this.deleteCar.bind(this);
+        this.search = this.search.bind(this);
     }
 
     componentDidMount(){
         CarService.getCars().then((res) => {
-            this.setState({ cars: res.data});
+            this.setState({ cars: res.data, searchCars: res.data});
         });
     }
 
@@ -46,13 +48,18 @@ class Cars extends Component {
         });
     }
 
-    search(cars){
-        this.setState({cars: this.state.cars.filter(car => (car.available.toLowerCase().indexOf(this.state.available) > -1 
+    search(){
+        this.setState({ searchCars: this.state.cars});
+        console.log(this.state.cars, this.state.searchCars);
+
+        this.setState({searchCars: this.state.searchCars.filter
+            (car => (car.available.toLowerCase().indexOf(this.state.available) > -1 
             && car.mark.toLowerCase().indexOf(this.state.mark) > -1) 
             && car.type.toLowerCase().indexOf(this.state.type) > -1
             && car.color.toLowerCase().indexOf(this.state.color) > -1)
-        });
+        })
     }
+
 
     render() {
         return (
@@ -60,7 +67,7 @@ class Cars extends Component {
             <Nav>
                 <Nav.Link style={{width: '20%'}}>
                     <Form.Select size="sm" value={this.state.mark} onChange={(e) => this.setState({mark: e.target.value})}>
-                        <option>Wybierz markę</option>
+                        <option value="">Wybierz markę</option>
                         <option value="audi">Audi</option>
                         <option value="mercedes">Mercedes</option>
                         <option value="volkswagen">Volkswagen</option>
@@ -68,7 +75,7 @@ class Cars extends Component {
                 </Nav.Link>
                 <Nav.Link  style={{width: '20%'}}>
                     <Form.Select size="sm" value={this.state.available} onChange={(e) => this.setState({available: e.target.value})}>
-                        <option>Wybierz dostępność</option>
+                        <option value="">Wybierz dostępność</option>
                         <option value="tak">Tak</option>
                         <option value="nie">Nie</option>
                     </Form.Select>
@@ -100,9 +107,10 @@ class Cars extends Component {
                 </Nav.Link>
             </Nav>
                     <Button  onClick={this.addCar} size="lg" variant="dark" type="submit">Dodaj Samochód</Button>
-                    <Button style={{float: 'right'}} onClick = { () => this.search(this.state.cars)}  size="lg" variant="primary" type="submit">Filtruj</Button> 
+                    <Button style={{float: 'right'}} onClick = { () => this.search()}  size="lg" variant="primary" type="submit">Filtruj</Button> 
                     {
-                        this.state.cars.map(
+                        this.state.searchCars && this.state.searchCars.length > 0?
+                        this.state.searchCars.map(
                             car => 
                                 <Card key = {car.id} border="secondary" className='cards'>
                                      <Card.Header><h3>{ car.mark } { car.model }</h3></Card.Header>
@@ -144,6 +152,7 @@ class Cars extends Component {
                                     </Card.Body>
                                 </Card>        
                         )
+                        : <h1 style={{marginLeft: "45%"}}>Brak wyników</h1>
                     }
             </div>
         )

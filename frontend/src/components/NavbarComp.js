@@ -16,6 +16,7 @@ import Departments from './subpages/Departments';
 import Booklet from './subpages/Booklet';
 import BookletForm from './forms/BookletForm';
 import Login from './Login';
+import { CarList } from './subpages/CarList';
 
 
 class NavbarComp extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DepartmentService from '../services/DepartmentService';
-import { Button, Card, Table } from 'react-bootstrap';
+import { Card, Table } from 'react-bootstrap';
 import '../Form.css';
 
 class Departments extends Component {
