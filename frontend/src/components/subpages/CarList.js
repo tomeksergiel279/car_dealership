@@ -5,29 +5,27 @@ import '../Form.css';
 
 export const CarList = () => {
     const [cars, setCars] = useState([]);
-    const [initialCars, setInitialCars] = useState([]);
     const [mark, setMark] = useState("");
     const [available, setAvailable] = useState("");
+    const [color, setColor] = useState("");
+    const [type, setType] = useState("");
+    const [price, setPrice] = useState("");
     const [isLoading, setLouder] = useState(true);
 
 
     useEffect(() => {
         CarService.getCars().then((res) => {
             setCars(res.data);
-            setInitialCars(res.data);
             setLouder(false);
         });
     },[])
 
     const filtredCars = () => {
-        return cars.filter(car => car.mark.toLowerCase().includes(mark.toLowerCase()));
-    }
-
-    const onSearchHandler = () => {
-    //     setCars(initialCars
-    //        // .filter(car => car.mark.toLowerCase() === mark.toLowerCase())
-    //        // .filter(car => car.available.toLowerCase() === available.toLowerCase())
-    //         )
+        return cars
+        .filter(car => car.mark.toLowerCase().includes(mark.toLowerCase()))
+        .filter(car => car.available.toLowerCase().includes(available.toLowerCase()))
+        .filter(car => car.color.toLowerCase().includes(color.toLowerCase()))
+        .filter(car => car.type.toLowerCase().includes(type.toLowerCase()));
     }
 
     if(isLoading){
@@ -46,10 +44,48 @@ export const CarList = () => {
                     <option value="volkswagen">Volkswagen</option>
                 </Form.Select>
             </Nav.Link>
+            <Nav.Link  style={{width: '20%'}}>
+                    <Form.Select size="sm" value={available} onChange={(e) => {
+                        setAvailable(e.target.value);
+                    }}>
+                        <option value="">Wybierz dostępność</option>
+                        <option value="tak">Tak</option>
+                        <option value="nie">Nie</option>
+                    </Form.Select>
+                </Nav.Link>
+                <Nav.Link  style={{width: '20%'}}>
+                    <Form.Select size="sm" value={type} onChange={(e) => {
+                        setType(e.target.value);
+                    }}>
+                        <option value="">Wybierz rodzaj</option>
+                        <option value="osobowe">Osobowe</option>
+                        <option value="dostawcze">Dostawcze</option>
+                    </Form.Select>
+                </Nav.Link>
+                <Nav.Link  style={{width: '20%'}}>
+                    <Form.Select size="sm" value={color} onChange={(e) => {
+                        setColor(e.target.value);
+                    }}>
+                        <option value="">Wybierz kolor</option>
+                        <option value="czarny">Czarny</option>
+                        <option value="srebrny">Srebrny</option>
+                        <option value="biały">Biały</option>
+                        <option value="zielony">Zielony</option>
+                        <option value="czerwony">Czerwony</option>
+                        <option value="niebieski">Niebieski</option>
+                    </Form.Select>
+                </Nav.Link>
+                <Nav.Link style={{width: '20%'}}>
+                    <Form.Select size="sm" value={price} onChange={(e) => {
+                        setPrice(e.target.value);  
+                    }}> 
+                        <option>Wybierz cenę</option>
+                        <option value="10000">10 000</option>
+                        <option value="20000">20 000</option>
+                    </Form.Select>
+                </Nav.Link>
         </Nav>
-                <Button style={{float: 'right'}} onClick = {onSearchHandler}  size="lg" variant="primary" type="submit">Filtruj</Button> 
                 {
-
                     filtredCars().map(
                         car => 
                             <Card key = {car.id} border="secondary" className='cards'>

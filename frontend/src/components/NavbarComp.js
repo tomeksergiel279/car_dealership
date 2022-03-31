@@ -56,7 +56,7 @@ class NavbarComp extends Component {
                             <Route path = "/view-client/:id" component = {ClientView}></Route>
                             <Route path = "/booklet/:id" component = {Booklet}></Route>
                             <Route path = "/update-booklet/:id" component = {BookletForm}></Route>
-                            <Route path = "/cars" component = {Cars}></Route>
+                            <Route path = "/cars" component = {CarList}></Route>
                             <Route path = "/add-car/:id" component = {CarForm}></Route>
                             <Route path = "/departments" component = {Departments}></Route>
                             <Route path = "/contact" component = {Contact}></Route>
