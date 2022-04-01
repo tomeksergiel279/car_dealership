@@ -9,30 +9,28 @@ export const CarList = () => {
     const [available, setAvailable] = useState("");
     const [color, setColor] = useState("");
     const [type, setType] = useState("");
-    const [price, setPrice] = useState("");
-    const [isLoading, setLouder] = useState(true);
-
+    const [price, setPrice] = useState("0, 500000");
 
     useEffect(() => {
         CarService.getCars().then((res) => {
             setCars(res.data);
-            setLouder(false);
         });
     },[])
 
     const filtredCars = () => {
+        let prices = price.split(",");
+
         return cars
         .filter(car => car.mark.toLowerCase().includes(mark.toLowerCase()))
         .filter(car => car.available.toLowerCase().includes(available.toLowerCase()))
         .filter(car => car.color.toLowerCase().includes(color.toLowerCase()))
-        .filter(car => car.type.toLowerCase().includes(type.toLowerCase()));
+        .filter(car => car.type.toLowerCase().includes(type.toLowerCase()))
+        .filter(car => (car.price >= prices[0] && car.price <= prices[1]));
     }
 
-    if(isLoading){
-        return <h1>Loading</h1>
-    }
     return (
         <div><br />
+        <h2 className="text-center">Filtrowanie</h2>
         <Nav>
             <Nav.Link style={{width: '20%'}}>
                 <Form.Select size="sm" value={mark} onChange={(e) => {
@@ -45,22 +43,21 @@ export const CarList = () => {
                 </Form.Select>
             </Nav.Link>
             <Nav.Link  style={{width: '20%'}}>
-                    <Form.Select size="sm" value={available} onChange={(e) => {
-                        setAvailable(e.target.value);
-                    }}>
-                        <option value="">Wybierz dostępność</option>
-                        <option value="tak">Tak</option>
-                        <option value="nie">Nie</option>
-                    </Form.Select>
-                </Nav.Link>
-                <Nav.Link  style={{width: '20%'}}>
-                    <Form.Select size="sm" value={type} onChange={(e) => {
-                        setType(e.target.value);
-                    }}>
-                        <option value="">Wybierz rodzaj</option>
-                        <option value="osobowe">Osobowe</option>
-                        <option value="dostawcze">Dostawcze</option>
-                    </Form.Select>
+                <Form.Select size="sm" value={available} onChange={(e) => {
+                    setAvailable(e.target.value);
+                }}>
+                    <option value="">Wybierz dostępność</option>
+                    <option value="tak">Tak</option>
+                    <option value="nie">Nie</option>
+                </Form.Select>
+            </Nav.Link>
+            <Nav.Link  style={{width: '20%'}}>
+                <Form.Select size="sm" value={type} onChange={(e) => {
+                    setType(e.target.value);
+                }}>
+                    <option value="">Wybierz rodzaj</option>
+                    <option value="osobowe">Osobowe</option>
+                    <option value="dostawcze">Dostawcze</option>                    </Form.Select>
                 </Nav.Link>
                 <Nav.Link  style={{width: '20%'}}>
                     <Form.Select size="sm" value={color} onChange={(e) => {
@@ -79,13 +76,18 @@ export const CarList = () => {
                     <Form.Select size="sm" value={price} onChange={(e) => {
                         setPrice(e.target.value);  
                     }}> 
-                        <option>Wybierz cenę</option>
-                        <option value="10000">10 000</option>
-                        <option value="20000">20 000</option>
+                        <option value='0, 500000'>Wybierz cenę</option>
+                        <option value='0, 9999'>Do 10 000</option>
+                        <option value='10000, 19999'>Od 10 000 do 19 999</option>
+                        <option value='20000, 29999'>Od 20 000 do 29 999</option>
+                        <option value='30000, 39999'>Od 30 000 do 39 999</option>
+                        <option value='40000, 49999'>Od 40 000 do 49 999</option>
+                        <option value='50000, 500000'>Od 50 000</option>
                     </Form.Select>
                 </Nav.Link>
         </Nav>
-                {
+        <Button style={{marginTop: "20px"}} size="lg" variant="dark" type="submit">Dodaj Samochód</Button>
+        {
                     filtredCars().map(
                         car => 
                             <Card key = {car.id} border="secondary" className='cards'>
@@ -124,7 +126,7 @@ export const CarList = () => {
                                         </tbody>
                                     </Table>
                                         <Button onClick = { () => this.editCar(car.id)} size="md" variant="secondary" type="submit">Modyfikuj</Button> 
-                                        <Button style={{marginLeft: "10px"}} onClick = { () => this.deleteCar(car.id)}  size="md" variant="danger" type="submit">Usuń</Button> 
+                                        <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit">Usuń</Button> 
                                 </Card.Body>
                             </Card>        
                     )

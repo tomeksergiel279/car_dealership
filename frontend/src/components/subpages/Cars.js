@@ -107,9 +107,7 @@ class Cars extends Component {
                 </Nav.Link>
             </Nav>
                     <Button  onClick={this.addCar} size="lg" variant="dark" type="submit">Dodaj Samochód</Button>
-                    <Button style={{float: 'right'}} onClick = { () => this.search()}  size="lg" variant="primary" type="submit">Filtruj</Button> 
                     {
-                        this.state.searchCars && this.state.searchCars.length > 0?
                         this.state.searchCars.map(
                             car => 
                                 <Card key = {car.id} border="secondary" className='cards'>
@@ -152,7 +150,6 @@ class Cars extends Component {
                                     </Card.Body>
                                 </Card>        
                         )
-                        : <h1 style={{marginLeft: "45%"}}>Brak wyników</h1>
                     }
             </div>
         )
