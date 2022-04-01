@@ -9,14 +9,14 @@ import Clients from './subpages/Clients';
 import ClientForm from './forms/ClientForm';
 import ClientView from './forms/ClientView';
 import Home from './subpages/Home';
-import Cars from './subpages/Cars';
 import CarForm from './forms/CarForm';
 import Contact from './subpages/Contact';
 import Departments from './subpages/Departments';
 import Booklet from './subpages/Booklet';
 import BookletForm from './forms/BookletForm';
 import Login from './Login';
-import { CarList } from './subpages/CarList';
+import { Cars } from './subpages/Cars';
+
 
 
 class NavbarComp extends Component {
@@ -56,7 +56,7 @@ class NavbarComp extends Component {
                             <Route path = "/view-client/:id" component = {ClientView}></Route>
                             <Route path = "/booklet/:id" component = {Booklet}></Route>
                             <Route path = "/update-booklet/:id" component = {BookletForm}></Route>
-                            <Route path = "/cars" component = {CarList}></Route>
+                            <Route path = "/cars" component = {Cars}></Route>
                             <Route path = "/add-car/:id" component = {CarForm}></Route>
                             <Route path = "/departments" component = {Departments}></Route>
                             <Route path = "/contact" component = {Contact}></Route>
