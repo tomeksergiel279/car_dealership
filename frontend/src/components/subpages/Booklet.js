@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import BookletService from '../services/BookletService';
-import { Button, Card, Table } from 'react-bootstrap'
+import { Button, Card, Table } from 'react-bootstrap';
+import emailjs from "emailjs-com";
 import '../Form.css';
 
 class Booklet extends Component {
@@ -13,6 +14,18 @@ class Booklet extends Component {
         }
 
         this.editBooklet = this.editBooklet.bind(this);
+    }
+
+    sendEmail(e) {
+        e.preventDefault();
+
+    emailjs.sendForm('service_gmail', 'email_rental', e.target, 'DtN43ylzFlL8ZsKlo')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+        e.target.reset()
     }
 
     componentDidMount(){
@@ -49,7 +62,11 @@ class Booklet extends Component {
                         </tbody> 
                     </Table>
                     <Button onClick = { () => this.editBooklet(this.state.booklet.id)} size="md" variant="secondary" type="submit">Modyfikuj</Button>
-                    <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Powrót</Button>
+                    <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Powrót</Button><br /><br />
+                    <form onSubmit={this.sendEmail}>
+                        <input name="date" value={ this.state.booklet.serviceInspection } /><br />
+                        <Button size="md" variant="primary" type="submit">Wyslij przypomnienie o badaniu technicznym</Button>
+                    </form>
                 </Card.Body>
             </Card>
             </div>

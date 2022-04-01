@@ -16,6 +16,7 @@ import Booklet from './subpages/Booklet';
 import BookletForm from './forms/BookletForm';
 import Login from './Login';
 import { Cars } from './subpages/Cars';
+import Email from './Email';
 
 
 
@@ -47,13 +48,14 @@ class NavbarComp extends Component {
                     <div className="container">
                         <Switch> 
                             <Route path = "/" exact component = {Home}></Route>
-                            <Route path = "/home" component = {Home}></Route>
+                            <Route path = "/home" component = {Email}></Route>
                             <Route path = "/employees" component = {Employees}></Route>
                             <Route path = "/add-employee/:id" component = {EmployeeForm}></Route>
                             <Route path = "/view-employee/:id" component = {EmployeeView}></Route>
                             <Route path = "/clients" component = {Clients}></Route>
                             <Route path = "/add-client/:id" component = {ClientForm}></Route>
                             <Route path = "/view-client/:id" component = {ClientView}></Route>
+                            <Route path = "/booklet/:id" component = {Booklet}></Route>
                             <Route path = "/booklet/:id" component = {Booklet}></Route>
                             <Route path = "/update-booklet/:id" component = {BookletForm}></Route>
                             <Route path = "/cars" component = {Cars}></Route>
