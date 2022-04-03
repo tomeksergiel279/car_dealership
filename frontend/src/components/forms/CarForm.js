@@ -18,7 +18,8 @@ class CarForm extends Component {
             productionYear: '',
             vin: '',
             available: '',
-            type: ''
+            type: '',
+            booklet: []
         }
 
         this.changeColorHandler = this.changeColorHandler.bind(this);
@@ -50,7 +51,7 @@ class CarForm extends Component {
                     available: car.available,
                     type: car.type
                 });
-            });
+            })
         }        
     }
 

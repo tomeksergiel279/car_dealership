@@ -14,9 +14,7 @@ import Contact from './subpages/Contact';
 import Departments from './subpages/Departments';
 import Booklet from './subpages/Booklet';
 import BookletForm from './forms/BookletForm';
-import Login from './Login';
 import { Cars } from './subpages/Cars';
-import Email from './Email';
 
 
 
@@ -24,31 +22,31 @@ class NavbarComp extends Component {
     render() {
         return (
             <div>
-                <Navbar bg="dark" expand="lg" variant="dark">
+                <Navbar  sticky="top" bg="dark" expand="lg" variant="dark">
                 <div className='container'>
-                    <Navbar.Brand href="/">Wypożyczalnia</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
+                        <Nav.Link href="/home">STRONA GŁÓWNA</Nav.Link>
+                    </Nav>
+                    <Nav>
+                    <Nav.Link></Nav.Link>
+                        
+                        <Nav.Link className='d-flex' href="/cars">SAMOCHODY</Nav.Link>
+                        <Nav.Link href="/clients">KLIENCI</Nav.Link> 
+                        <Nav.Link href="/employees">PRACOWNICY</Nav.Link>  
+                        <Nav.Link href="/departments">ODDZIAŁY</Nav.Link>
                         <Nav.Link></Nav.Link>
-                        <Nav.Link href="/home">Strona główna</Nav.Link>
-                        <Nav.Link href="/cars">Samochody</Nav.Link>
-                        <Nav.Link href="/clients">Klienci</Nav.Link> 
-                        <Nav.Link href="/employees">Pracownicy</Nav.Link>  
-                        <Nav.Link href="/departments">Oddziały</Nav.Link>
-                        <Nav.Link></Nav.Link>
-                        <Nav.Link href="/contact">Kontakt</Nav.Link>
-                        <Nav.Link></Nav.Link>
-                        <Nav.Link href="/login">Login</Nav.Link>
+                        <Nav.Link href="/contact">KONTAKT</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
                 </div>
                 </Navbar>
                 <Router>
-                    <div className="container">
-                        <Switch> 
+                    <Switch> 
                             <Route path = "/" exact component = {Home}></Route>
-                            <Route path = "/home" component = {Email}></Route>
+                            <Route path = "/home" component = {Home}></Route>
+                        <div className="container">
                             <Route path = "/employees" component = {Employees}></Route>
                             <Route path = "/add-employee/:id" component = {EmployeeForm}></Route>
                             <Route path = "/view-employee/:id" component = {EmployeeView}></Route>
@@ -62,9 +60,8 @@ class NavbarComp extends Component {
                             <Route path = "/add-car/:id" component = {CarForm}></Route>
                             <Route path = "/departments" component = {Departments}></Route>
                             <Route path = "/contact" component = {Contact}></Route>
-                            <Route path = "/login" component = {Login}></Route>
-                        </Switch>
-                    </div>
+                            </div>
+                    </Switch>  
                 </Router>
             </div>
         );

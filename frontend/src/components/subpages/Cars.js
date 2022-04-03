@@ -50,7 +50,7 @@ export const Cars = () => {
 
     return (
         <div><br />
-        <h2 className="text-center">Filtrowanie</h2>
+        <h2 className='text-center display-5 mb-3'>Filtrowanie</h2>
         <Nav>
             <Nav.Link style={{width: '20%'}}>
                 <Form.Select size="sm" value={mark} onChange={(e) => {

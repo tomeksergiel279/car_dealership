@@ -65,6 +65,7 @@ class BookletForm extends Component {
                                             <label> Ostatnia naprawa </label>
                                             <input name="lastName" className="form-control" 
                                                 value={this.state.lastRepair} onChange={this.changeLastRepairHandler}/>
+                                            
                                         </div><br />
                                         <Button onClick={this.updateBooklet} size="md" variant="secondary" type="submit">Zapisz</Button>  
                                         <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Anuluj</Button>                          
