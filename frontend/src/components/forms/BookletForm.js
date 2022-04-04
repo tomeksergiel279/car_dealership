@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import BookletService from '../services/BookletService';
 import { Button } from 'react-bootstrap';
 import '../Form.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
+
+toast.configure()
+
 
 class BookletForm extends Component {
     constructor(props) {
@@ -17,6 +23,7 @@ class BookletForm extends Component {
         this.changeServiceInspectionHandler = this.changeServiceInspectionHandler.bind(this);
         this.updateBooklet = this.updateBooklet.bind(this);
     }
+
 
     componentDidMount(){
         BookletService.getBookletById(this.state.id).then( (res) =>{
@@ -34,8 +41,11 @@ class BookletForm extends Component {
 
         console.log("booklet => "+ JSON.stringify(booklet));
 
-        BookletService.updateBooklet(booklet,this.state.id);
-        this.props.history.push(`/booklet/${this.state.id}`);
+        BookletService.updateBooklet(booklet,this.state.id).then( res => {
+            if(res.status === 200) { toast.success('Książka serwisowa zmodyfikowana') }
+            else { toast.error("Książka serwisowa nie zmodyfikowana") }
+            this.props.history.push(`/booklet/${this.state.id}`);
+        }).catch(err => toast.error("Błąd"));
     }
     
 

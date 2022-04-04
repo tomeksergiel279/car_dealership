@@ -48,7 +48,7 @@ class Departments extends Component {
                                 </Card>
                         )
                     }
-            <h3 className='text-center display-6 mb-3'> Nasze lokalizacje</h3><br /><br />
+            <h3 className='text-center display-5 mb-3'> Nasze lokalizacje</h3><br /><br />
             <Row style={{paddingBottom: "100px"}}>
                 <Col>
                     <iframe

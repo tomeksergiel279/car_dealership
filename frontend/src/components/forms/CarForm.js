@@ -131,7 +131,7 @@ class CarForm extends Component {
                 <div className='forms'>
                             <form>
                                 {this.getTitle()}
-                                <div className = "form-group">
+                                        <div className = "form-group">
                                             <label> Marka </label>
                                             <input name="mark" className="form-control" 
                                                 value={this.state.mark} onChange={this.changeMarkHandler}/>

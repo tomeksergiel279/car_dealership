@@ -3,6 +3,11 @@ import BookletService from '../services/BookletService';
 import { Button, Card, Table } from 'react-bootstrap';
 import emailjs from "emailjs-com";
 import '../Form.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
+
+toast.configure()
 
 class Booklet extends Component {
     constructor(props) {
@@ -19,13 +24,20 @@ class Booklet extends Component {
     sendEmail(e) {
         e.preventDefault();
 
-    emailjs.sendForm('service_gmail', 'email_rental', e.target, 'DtN43ylzFlL8ZsKlo')
-        .then((result) => {
-            console.log(result.text);
-        }, (error) => {
-            console.log(error.text);
-        });
-        e.target.reset()
+        emailjs.sendForm('service_gmail', 'booklet', e.target, 'DtN43ylzFlL8ZsKlo')
+            .then((result) => {
+                console.log(result.text);
+                if(result.status === 200){
+                    toast.success('Wiadomość wysłana')
+                }
+                else{
+                    toast.danger('Wiadomość nie wysłana')
+                }
+            }, (error) => {
+                console.log(error.text);
+                toast.danger('Wiadomość nie wysłana')
+            });
+            e.target.reset()
     }
 
     componentDidMount(){
@@ -63,8 +75,24 @@ class Booklet extends Component {
                     </Table>
                     <Button onClick = { () => this.editBooklet(this.state.booklet.id)} size="md" variant="secondary" type="submit">Modyfikuj</Button>
                     <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Powrót</Button><br /><br />
-                    <form onSubmit={this.sendEmail}>
-                      <Button size="md" variant="primary" type="submit">Wyslij przypomnienie o badaniu technicznym</Button>
+                    <form onSubmit={this.sendEmail} className='contact_form w-100'>
+                        <div className = "form-group">
+                            <label> Imię </label>
+                            <input name="client" className="form-control" />
+                        </div>       
+                        <div className = "form-group">
+                            <label> Samochód </label>
+                            <input name="car" className="form-control" />
+                        </div>   
+                        <div className = "form-group">
+                            <label> Data przeglądu </label>
+                            <input name="date" className="form-control" />
+                        </div>  
+                        <div className = "form-group">
+                            <label> Email </label>
+                            <input name="email" className="form-control" /><br />
+                        </div>
+                        <Button size="md" variant="primary" type="submit">Wyślij powiadomienie o badaniu</Button> 
                     </form>
                 </Card.Body>
             </Card>

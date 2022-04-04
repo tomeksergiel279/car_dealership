@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import EmployeeService from '../services/EmployeeService';
 import { Button } from 'react-bootstrap';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
+
+toast.configure()
 
 class Employees extends Component {
     constructor(props) {
@@ -16,7 +21,10 @@ class Employees extends Component {
 
     deleteEmployee(id){
         EmployeeService.deleteEmployee(id).then( res => {
-            this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
+            this.setState({employees: this.state.employees.filter(employee => employee.id !== id)}); 
+                console.log(res.status);
+                if(res.status === 204) { toast.success('Pracownik usunięty') }
+                else { toast.error("Nie udało się usunąć pracownika") }
         });
     }
 
@@ -37,8 +45,6 @@ class Employees extends Component {
     addEmployee(){
         this.props.history.push('/add-employee/_add');
     }
-
-
 
     render() {
         return (

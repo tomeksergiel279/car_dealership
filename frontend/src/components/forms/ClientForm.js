@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import ClientService from '../services/ClientService';
 import { Button } from 'react-bootstrap';
 import '../Form.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
+toast.configure()
 
 class ClientForm extends Component {
 
@@ -60,12 +64,18 @@ class ClientForm extends Component {
 
         if(this.state.id === '_add'){
             ClientService.createClient(client).then(res =>{
+                if(res.status === 200) { toast.success('Klient dodany') }
+                else { toast.error("Klient nie dodany") }
                 this.props.history.push('/clients');
-            });
+            })
+            .catch(err => toast.error("Niepoprawne dane"));
         }else{
-            ClientService.updateClient(client, this.state.id).then( res => {
+            ClientService.updateClient(client, this.state.id)
+            .then( res => {
+                if(res.status === 200) { toast.success('Klient zmodyfikowany') }
                 this.props.history.push('/clients');
-            });
+            })
+            .catch(err => toast.error("Niepoprawne dane"));
         }
     }
 

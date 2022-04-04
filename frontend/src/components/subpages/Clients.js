@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import ClientService from '../services/ClientService';
 import { Button } from 'react-bootstrap';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
+toast.configure()
 
 class Clients extends Component {
     constructor(props) {
@@ -18,6 +22,9 @@ class Clients extends Component {
     deleteClient(id){
         ClientService.deleteClient(id).then( res => {
             this.setState({clients: this.state.clients.filter(client => client.id !== id)});
+            console.log(res.status);
+            if(res.status === 204) { toast.success('Klient usunięty') }
+            else { toast.error("Nie udało się usunąć klienta") }
         });
     }
 

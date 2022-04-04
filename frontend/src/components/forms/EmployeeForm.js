@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import EmployeeService from '../services/EmployeeService';
 import { Button } from 'react-bootstrap';
 import '../Form.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
+
+toast.configure();
 
 class EmployeeForm extends Component {
 
@@ -55,13 +60,20 @@ class EmployeeForm extends Component {
         console.log('employee => ' + JSON.stringify(employee));
 
         if(this.state.id === '_add'){
-            EmployeeService.createEmployee(employee).then(res =>{
+            EmployeeService.createEmployee(employee)
+            .then(res =>{
+                if(res.status === 200) { toast.success('Pracownik dodany') }
+                else { toast.error("Pracownik nie dodany") }
                 this.props.history.push('/employees');
-            });
+            })
+            .catch(err => toast.error("Niepoprawne dane"));
         }else{
-            EmployeeService.UpdateEmployee(employee, this.state.id).then( res => {
+            EmployeeService.UpdateEmployee(employee, this.state.id)
+            .then( res => {
+                if(res.status === 200) { toast.success('Pracownik zmodyfikowany') }
                 this.props.history.push('/employees');
-            });
+            })
+            .catch(err => toast.error("Niepoprawne dane"));
         }
     }
 
@@ -135,7 +147,7 @@ class EmployeeForm extends Component {
                                         <div className = "form-group">
                                             <label> Numer telefonu </label>
                                             <input name="phoneNumber" className="form-control" 
-                                                value={this.state.phoneNumber} onChange={this.changePhoneNumberHandler}/>
+                                                value={this.state.phoneNumber} onChange={this.changePhoneNumberHandler} />
                                         </div><br />
                                         <Button size="md" variant="secondary" type="submit" onClick={this.saveOrUpdateEmployee}>Zapisz</Button>  
                                         <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Anuluj</Button>                          
