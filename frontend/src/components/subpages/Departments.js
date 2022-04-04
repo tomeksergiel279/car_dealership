@@ -26,6 +26,7 @@ class Departments extends Component {
     render() {
         return (
             <div><br />
+            <h2 className='text-center display-5 mb-3'>Oddziały</h2><br /> 
             <Row>
                     {
                         this.state.departments.map(

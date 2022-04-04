@@ -119,7 +119,7 @@ export const Cars = () => {
                 
                     filtredCars().map(
                         car => 
-                            <Card key = {car.id} border="secondary" className='cards'>
+                            <Card key = {car.id} border="secondary" className='card'>
                                  <Card.Header><h3>{ car.mark } { car.model }</h3></Card.Header>
                                  <Card.Img variant="top" src={car.img} height="200px"/>
                                  <Card.Body>
