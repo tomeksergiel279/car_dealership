@@ -64,15 +64,7 @@ class Booklet extends Component {
                     <Button onClick = { () => this.editBooklet(this.state.booklet.id)} size="md" variant="secondary" type="submit">Modyfikuj</Button>
                     <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Powrót</Button><br /><br />
                     <form onSubmit={this.sendEmail}>
-                        <label>Dane klienta:</label><br/>
-                        <input name="client" /><br />
-                        <label>Data:</label><br/>
-                        <input name="date" /><br />
-                        <label>Nazwa pojazdu:</label><br/>
-                        <input name="car" /><br />
-                        <label>Email:</label><br/>
-                        <input name="email" /><br /><br />
-                        <Button size="md" variant="primary" type="submit">Wyslij przypomnienie o badaniu technicznym</Button>
+                      <Button size="md" variant="primary" type="submit">Wyslij przypomnienie o badaniu technicznym</Button>
                     </form>
                 </Card.Body>
             </Card>

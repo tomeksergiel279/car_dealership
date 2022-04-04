@@ -43,10 +43,8 @@ class NavbarComp extends Component {
                 </div>
                 </Navbar>
                 <Router>
+                <div className="container">
                     <Switch> 
-                            <Route path = "/" exact component = {Home}></Route>
-                            <Route path = "/home" component = {Home}></Route>
-                        <div className="container">
                             <Route path = "/employees" component = {Employees}></Route>
                             <Route path = "/add-employee/:id" component = {EmployeeForm}></Route>
                             <Route path = "/view-employee/:id" component = {EmployeeView}></Route>
@@ -60,8 +58,12 @@ class NavbarComp extends Component {
                             <Route path = "/add-car/:id" component = {CarForm}></Route>
                             <Route path = "/departments" component = {Departments}></Route>
                             <Route path = "/contact" component = {Contact}></Route>
-                            </div>
                     </Switch>  
+                </div>
+                    <Switch>
+                        <Route path = "/" exact component = {Home}></Route>
+                        <Route path = "/home" component = {Home}></Route>
+                    </Switch>
                 </Router>
             </div>
         );

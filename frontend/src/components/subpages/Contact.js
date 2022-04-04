@@ -2,7 +2,9 @@ import React from 'react';
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import { AiOutlineMail, AiTwotonePhone } from "react-icons/ai";
 
+
 export default function Contact() {
+
     return (
         <Container  className='container_contact'>
                     <br />
@@ -14,9 +16,7 @@ export default function Contact() {
                     <h3 className='text-center display-7 mb-3'> Informacje kontaktowe</h3><br /><br />
                     <address>
                         <strong><h5><AiOutlineMail />  carrentalkrakow@gmail.com</h5></strong><br />
-                        <p>
                             <strong><h5><AiTwotonePhone />  +48 798 897 978</h5></strong>
-                        </p>
                     </address>
                 </Col>
                 <Col lg="7" className="d-flex align-items-center">
@@ -42,7 +42,7 @@ export default function Contact() {
                     </form>
                 </Col>
             </Row><br /><br />
-            <h3 className='text-center display-6 mb-3'> Nasze lokalizacje</h3><br /><br />
+            
         </Container>
     )
 }

@@ -42,7 +42,7 @@ class Clients extends Component {
     render() {
         return (
             <div><br />
-                <h2 className="text-center">Lista Klientów</h2><br />     
+                <h2 className='text-center display-5 mb-3'>Lista Klientów</h2><br />     
                 <div className = "row">
                     <table className = "table table-striped table-bordered">
                         <thead>

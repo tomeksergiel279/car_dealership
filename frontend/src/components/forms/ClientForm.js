@@ -107,9 +107,9 @@ class ClientForm extends Component {
 
     getTitle(){
         if(this.state.id === '_add'){
-            return <h2 className="text-center">Dodaj Klienta</h2>
+            return <h2 className='text-center display-5 mb-3'>Dodaj Klienta</h2>
         }else{
-            return <h2 className="text-center">Zmodyfikuj Klienta</h2>
+            return <h2 className='text-center display-5 mb-3'>Zmodyfikuj Klienta</h2>
         }
     }
 

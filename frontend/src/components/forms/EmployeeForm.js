@@ -95,9 +95,9 @@ class EmployeeForm extends Component {
 
     getTitle(){
         if(this.state.id === '_add'){
-            return <h2 className="text-center">Dodaj Pracownika</h2>
+            return <h2 className='text-center display-5 mb-3'>Dodaj Pracownika</h2>
         }else{
-            return <h2 className="text-center">Zmodyfikuj Pracownika</h2>
+            return <h2 className='text-center display-5 mb-3'>Zmodyfikuj Pracownika</h2>
         }
     }
 

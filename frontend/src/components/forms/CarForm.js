@@ -119,9 +119,9 @@ class CarForm extends Component {
 
     getTitle(){
         if(this.state.id === '_add'){
-            return <h2 className="text-center">Dodaj Samochód</h2>
+            return <h2 className='text-center display-5 mb-3'>Dodaj Samochód</h2>
         }else{
-            return <h2 className="text-center">Zmodyfikuj Samochód</h2>
+            return <h2 className='text-center display-5 mb-3'>Zmodyfikuj Samochód</h2>
         }
     }
 
