@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react"
 import CarService from "../services/CarService";
-import { Button, Card, Table, Form, Nav} from 'react-bootstrap';
-import '../Form.css';
+import { Button, Card, Table, Form, Nav, Row} from 'react-bootstrap';
+import '../Car.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
+toast.configure()
 
 export const Cars = () => {
     const [cars, setCars] = useState([]);
@@ -29,10 +33,12 @@ export const Cars = () => {
     }
 
     const deleteCar = (id) => {
-        CarService.deleteCar(id).then(() => {
+        CarService.deleteCar(id).then((res) => {
             setCars(cars.filter(car => {
                 return car.id !== id;
             }))
+            if(res.status === 204) { toast.success('Samochód usunięty') }
+            else { toast.error("Nie udało się usunąć samochodu") }
         })
     }
 
@@ -108,12 +114,14 @@ export const Cars = () => {
                 </Nav.Link>
         </Nav>
         <Button onClick={addCar} style={{marginTop: "20px"}} size="lg" variant="dark" type="submit">Dodaj Samochód</Button>
+        <Row>
         {
+                
                     filtredCars().map(
                         car => 
                             <Card key = {car.id} border="secondary" className='cards'>
                                  <Card.Header><h3>{ car.mark } { car.model }</h3></Card.Header>
-                                 <Card.Img variant="top" src={car.img} height="300px"/>
+                                 <Card.Img variant="top" src={car.img} height="200px"/>
                                  <Card.Body>
                                     <Table>
                                         <tbody>
@@ -152,6 +160,7 @@ export const Cars = () => {
                             </Card>        
                     )
                 }
+                </Row>
         </div>
     )
 }

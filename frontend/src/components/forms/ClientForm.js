@@ -63,7 +63,8 @@ class ClientForm extends Component {
         console.log('client => ' + JSON.stringify(client));
 
         if(this.state.id === '_add'){
-            ClientService.createClient(client).then(res =>{
+            ClientService.createClient(client)
+            .then(res =>{
                 if(res.status === 200) { toast.success('Klient dodany') }
                 else { toast.error("Klient nie dodany") }
                 this.props.history.push('/clients');

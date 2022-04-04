@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DepartmentService from '../services/DepartmentService';
 import { Card, Table, Col, Row } from 'react-bootstrap';
-import '../Form.css';
+import '../Department.css';
 
 
 
@@ -26,6 +26,7 @@ class Departments extends Component {
     render() {
         return (
             <div><br />
+            <Row>
                     {
                         this.state.departments.map(
                             department => 
@@ -48,7 +49,7 @@ class Departments extends Component {
                                 </Card>
                         )
                     }
-            <h3 className='text-center display-5 mb-3'> Nasze lokalizacje</h3><br /><br />
+                </Row><br />
             <Row style={{paddingBottom: "100px"}}>
                 <Col>
                     <iframe

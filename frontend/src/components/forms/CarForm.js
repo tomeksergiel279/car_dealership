@@ -3,6 +3,11 @@ import CarService from '../services/CarService';
 import BookletService from '../services/BookletService';
 import { Button } from 'react-bootstrap';
 import '../Form.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
+
+toast.configure()
 
 class CarForm extends Component {
     constructor(props) {
@@ -66,14 +71,20 @@ class CarForm extends Component {
         console.log('booklet => ' + JSON.stringify(booklet));
 
         if(this.state.id === '_add'){
-            CarService.createCar(car).then(res =>{
+            CarService.createCar(car)
+            .then(res =>{
+                if(res.status === 200) { toast.success('Samochód dodany') }
+                else { toast.error("Samochód nie dodany") }
                 this.props.history.push('/cars');
-                BookletService.createBooklet(booklet,this.state.vin);
-            });
+            })
+            .catch(err => toast.error("Niepoprawne dane"));
         }else{
-            CarService.updateCar(car, this.state.id).then( res => {
+            CarService.updateCar(car, this.state.id)
+            .then( res => {
+                if(res.status === 200) { toast.success('Samochód zmodyfikowany') }
                 this.props.history.push('/cars');
-            });
+            })
+            .catch(err => toast.error("Niepoprawne dane"));
         }
     }
 
