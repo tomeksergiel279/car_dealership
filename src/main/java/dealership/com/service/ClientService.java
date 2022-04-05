@@ -3,6 +3,7 @@ package dealership.com.service;
 import dealership.com.exception.ResourceAlreadyExist;
 import dealership.com.exception.ResourceNotFoundException;
 import dealership.com.model.Client;
+import dealership.com.model.Employee;
 import dealership.com.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,5 +72,20 @@ public class ClientService {
 
         clientRepository.delete(client);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestHeader("login") String login, @RequestHeader("password") String password) {
+        Optional<Client> clientFromDb = clientRepository.findByLogin(login);
+
+        if (clientFromDb.isEmpty() || !checkPassword(clientFromDb, password)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return ResponseEntity.ok().build();
+    }
+
+    private boolean checkPassword(Optional<Client> clientFromDb, String password) {
+        return clientFromDb.get().getPassword().equals(password);
     }
 }

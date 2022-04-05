@@ -15,6 +15,7 @@ import Departments from './subpages/Departments';
 import Booklet from './subpages/Booklet';
 import BookletForm from './forms/BookletForm';
 import { Cars } from './subpages/Cars';
+import Login from './subpages/Login';
 
 
 
@@ -38,6 +39,8 @@ class NavbarComp extends Component {
                         <Nav.Link href="/departments">ODDZIAŁY</Nav.Link>
                         <Nav.Link></Nav.Link>
                         <Nav.Link href="/contact">KONTAKT</Nav.Link>
+                        <Nav.Link></Nav.Link><Nav.Link></Nav.Link><Nav.Link></Nav.Link>
+                        <Nav.Link href="/login">ZALOGUJ</Nav.Link>
                     </Nav>
                     </Navbar.Collapse>
                 </div>
@@ -58,6 +61,7 @@ class NavbarComp extends Component {
                             <Route path = "/add-car/:id" component = {CarForm}></Route>
                             <Route path = "/departments" component = {Departments}></Route>
                             <Route path = "/contact" component = {Contact}></Route>
+                            <Route path = "/login" component = {Login}></Route>
                     </Switch>  
                 </div>
                     <Switch>

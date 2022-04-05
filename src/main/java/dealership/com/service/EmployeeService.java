@@ -77,4 +77,20 @@ public class EmployeeService {
         employeeRepository.delete(employee);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestHeader("login") String login, @RequestHeader("password") String password) {
+        Optional<Employee> employeeFromDb = employeeRepository.findByLogin(login);
+
+        if (employeeFromDb.isEmpty() || !checkPassword(employeeFromDb, password)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return ResponseEntity.ok().build();
+    }
+
+    private boolean checkPassword(Optional<Employee> employeeFromDb, String password) {
+        return employeeFromDb.get().getPassword().equals(password);
+    }
 }
