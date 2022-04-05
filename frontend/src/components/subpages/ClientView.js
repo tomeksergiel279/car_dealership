@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ClientService from '../services/ClientService'
 import { Button, Card, Table } from 'react-bootstrap'
-import '../Form.css';
+import '../styles/Form.css';
 
 class ClientView extends Component {
     constructor(props) {

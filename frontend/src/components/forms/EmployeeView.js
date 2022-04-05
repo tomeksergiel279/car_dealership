@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EmployeeService from '../services/EmployeeService';
 import { Button, Card, Table } from 'react-bootstrap'
-import '../Form.css';
+import '../styles/FormStyle.css';
 
 class EmployeeView extends Component {
     constructor(props) {

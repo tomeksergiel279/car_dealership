@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DepartmentService from '../services/DepartmentService';
 import { Card, Table, Col, Row } from 'react-bootstrap';
-import '../Department.css';
+import '../styles/Department.css';
 
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import CarService from "../services/CarService";
 import { Button, Card, Table, Form, Nav, Row} from 'react-bootstrap';
-import '../Car.css';
+import '../styles/Car.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 

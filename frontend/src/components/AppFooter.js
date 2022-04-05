@@ -1,9 +1,9 @@
 import React from "react";
-import '../Form.css';
+import './Form.css';
 
 const AppFooter = () => (
   <div className="footer text-center">
-    <p>Tomasz Sergiel &copy; Politechnika Krakowska</p>
+    <p>Tomasz Sergiel &copy; 2022 Politechnika Krakowska</p>
   </div>
 );
 

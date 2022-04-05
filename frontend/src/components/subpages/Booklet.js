@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import BookletService from '../services/BookletService';
 import { Button, Card, Table } from 'react-bootstrap';
 import emailjs from "emailjs-com";
-import '../Form.css';
+import '../styles/FormStyle.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 

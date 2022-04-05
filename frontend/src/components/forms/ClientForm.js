@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ClientService from '../services/ClientService';
 import { Button } from 'react-bootstrap';
-import '../Form.css';
+import '../styles/FormStyle.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 

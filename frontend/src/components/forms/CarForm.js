@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CarService from '../services/CarService';
 import BookletService from '../services/BookletService';
 import { Button } from 'react-bootstrap';
-import '../Form.css';
+import '../styles/FormStyle.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
