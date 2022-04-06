@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
 
@@ -15,12 +15,21 @@ import Departments from './subpages/Departments';
 import Booklet from './subpages/Booklet';
 import BookletForm from './forms/BookletForm';
 import { Cars } from './subpages/Cars';
-import Login from './subpages/Login';
+import AppFooter from './AppFooter';
 
 
+export const NavbarComp = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
 
-class NavbarComp extends Component {
-    render() {
+    useEffect(() => {
+        !user && window.location.replace("http://localhost:3000/login");
+    }, []);
+    
+    const handleLogout = () => {
+        localStorage.clear();
+        window.location.replace("http://localhost:3000/login");
+    }
+
         return (
             <div>
                 <Navbar  sticky="top" bg="dark" expand="lg" variant="dark">
@@ -34,13 +43,12 @@ class NavbarComp extends Component {
                     <Nav.Link></Nav.Link>
                         
                         <Nav.Link className='d-flex' href="/cars">SAMOCHODY</Nav.Link>
-                        <Nav.Link href="/clients">KLIENCI</Nav.Link> 
-                        <Nav.Link href="/employees">PRACOWNICY</Nav.Link>  
+                        {  <Nav.Link href="/clients">KLIENCI</Nav.Link> }
+                        {  <Nav.Link href="/employees">PRACOWNICY</Nav.Link> } 
                         <Nav.Link href="/departments">ODDZIAŁY</Nav.Link>
-                        <Nav.Link></Nav.Link>
                         <Nav.Link href="/contact">KONTAKT</Nav.Link>
-                        <Nav.Link></Nav.Link><Nav.Link></Nav.Link><Nav.Link></Nav.Link>
-                        <Nav.Link href="/login">ZALOGUJ</Nav.Link>
+                        <Nav.Link /><Nav.Link /><Nav.Link /><Nav.Link /><Nav.Link />
+                        <Nav.Link href="/login">ZALOGUJ</Nav.Link> 
                     </Nav>
                     </Navbar.Collapse>
                 </div>
@@ -51,7 +59,6 @@ class NavbarComp extends Component {
                             <Route path = "/employees" component = {Employees}></Route>
                             <Route path = "/add-employee/:id" component = {EmployeeForm}></Route>
                             <Route path = "/view-employee/:id" component = {EmployeeView}></Route>
-                            <Route path = "/clients" component = {Clients}></Route>
                             <Route path = "/add-client/:id" component = {ClientForm}></Route>
                             <Route path = "/view-client/:id" component = {ClientView}></Route>
                             <Route path = "/booklet/:id" component = {Booklet}></Route>
@@ -61,7 +68,6 @@ class NavbarComp extends Component {
                             <Route path = "/add-car/:id" component = {CarForm}></Route>
                             <Route path = "/departments" component = {Departments}></Route>
                             <Route path = "/contact" component = {Contact}></Route>
-                            <Route path = "/login" component = {Login}></Route>
                     </Switch>  
                 </div>
                     <Switch>
@@ -69,9 +75,9 @@ class NavbarComp extends Component {
                         <Route path = "/home" component = {Home}></Route>
                     </Switch>
                 </Router>
+                <AppFooter />
             </div>
         );
     }
-}
 
 export default NavbarComp;

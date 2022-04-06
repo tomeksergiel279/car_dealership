@@ -1,93 +1,62 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import '../styles/Login.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 
 toast.configure()
 
-class Login extends Component {
+export const Login = () => {
+    const [ login, setLogin] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ userType, setUserType ] = useState('');
+    const history = useHistory();
 
-    constructor(props) {
-        super(props)
+    
+  const loginHandler = (e) => {
 
-        this.state = {
-            id: this.props.match.params.id,
-            login: '',
-            password: '',
-            userType: ''
+    e.preventDefault()
 
-        }
-        this.changeLoginHandler = this.changeLoginHandler.bind(this);
-        this.changePasswordHandler = this.changePasswordHandler.bind(this);
-        this.changeUserTypeHandler = this.changeUserTypeHandler.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+    let path = 'http://localhost:8008/' + userType + '/login';
 
-    handleSubmit = event => {
-        event.preventDefault();
-        this.loginUser(this.state.login, this.state.password, this.state.userType);
-    }
+    console.log(login, password, userType, path)
 
-    loginUser(login, password, userType){
+    axios.post(path, {
+            login: login,
+            password: password
+    })
+    .then((res) => {
+        localStorage.setItem('user', JSON.stringify({
+            "login": login,
+            "userType": userType
+        }));
+        toast.success("Udało się zalogować");
+        history.push("/home");
+    })
+      .catch(err =>  toast.error("Błąd"))
+  }
 
-        let path = 'http://localhost:8008/' + this.state.userType + '/login';
-
-        console.log(this.state.login, this.state.password, this.state.userType, path)
-
-        fetch(path, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'login': login,
-                'password': password
-            }
-        }).then(function (response) {
-            if (response.status === 200) { 
-                toast.success('Udało się zalogować');     
-            } else {
-                toast.error('Niepoprawne dane');
-            }
-        }).catch(function (error) {
-            toast.error('Błąd'); 
-        });
-    }
-
-    changeLoginHandler = (event) => {
-        this.setState({login: event.target.value});
-    }
-
-    changePasswordHandler = (event) => {
-        this.setState({password: event.target.value});
-    }
-
-    changeUserTypeHandler = (event) => {
-        this.setState({userType: event.target.value});
-    }
-
-    render() {
-        return (
+  return (
             <div className="Login" >
                 <h1 className="LoginHeader text-center">Logowanie</h1>
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form>
                         <div className = "form-group">
                             <label> Login </label>
-                            <input name="login" className="form-control" 
-                                value={this.state.login} onChange={this.changeLoginHandler}/>
+                            <input className="form-control"  id="login" name="login" type="text" onChange={e => setLogin(e.target.value)}/>
                         </div>
                         <div className = "form-group">
                             <label> Hasło </label>
-                            <input type="password" name="password" className="form-control" 
-                                value={this.state.password} onChange={this.changePasswordHandler}/>
+                            <input  className="form-control"  id="password" name="password" type="password" onChange={e => setPassword(e.target.value)}/>
                         </div><br /> 
                                     
                         <div className="d-grid gap-2">
-                            <Button size="lg" variant="dark" type="submit">Zaloguj się</Button> 
+                            <Button size="lg" variant="dark" type="submit" onClick={(e) => loginHandler(e)}>Zaloguj się</Button> 
                         </div><br />
-                        <Form.Select className="form-group" size="md" value={this.state.userType} onChange={this.changeUserTypeHandler}>
-                        <option  value="">Wybierz użytkownika</option>
+                        <Form.Select className="form-group" id="userType" name="userType" onChange={e => setUserType(e.target.value)}>
+                            <option  value="">Wybierz użytkownika</option>
                             <option  value="client">Klient</option>
                             <option value="employee">Pracownik</option>
                         </Form.Select>      
@@ -97,6 +66,6 @@ class Login extends Component {
         );
     }
 
-}
+
 
 export default Login;

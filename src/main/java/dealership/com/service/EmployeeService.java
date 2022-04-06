@@ -78,19 +78,18 @@ public class EmployeeService {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-
     @PostMapping("/login")
-    public ResponseEntity login(@RequestHeader("login") String login, @RequestHeader("password") String password) {
-        Optional<Employee> employeeFromDb = employeeRepository.findByLogin(login);
+    public ResponseEntity login(@RequestBody Employee employee) {
+        Optional<Employee> employeeFromDb = employeeRepository.findByLogin(employee.getLogin());
 
-        if (employeeFromDb.isEmpty() || !checkPassword(employeeFromDb, password)) {
+        if (employeeFromDb.isEmpty() || wrongPassword(employeeFromDb, employee)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         return ResponseEntity.ok().build();
     }
 
-    private boolean checkPassword(Optional<Employee> employeeFromDb, String password) {
-        return employeeFromDb.get().getPassword().equals(password);
+    private boolean wrongPassword(Optional<Employee> employeeFromDb, Employee employee) {
+        return !employeeFromDb.get().getPassword().equals(employee.getPassword());
     }
 }
