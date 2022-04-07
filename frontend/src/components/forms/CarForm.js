@@ -4,8 +4,6 @@ import { Button } from 'react-bootstrap';
 import '../styles/FormStyle.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-
-
 toast.configure()
 
 class CarForm extends Component {
@@ -41,7 +39,8 @@ class CarForm extends Component {
     componentDidMount(){
         if(this.state.id === '_add'){
             return
-        }else{
+        }
+        else{
             CarService.GetCarById(this.state.id).then( (res) =>{
                 let car = res.data;
                 this.setState({
@@ -77,7 +76,8 @@ class CarForm extends Component {
                 this.props.history.push('/cars');
             })
             .catch(err => toast.error("Niepoprawne dane"));
-        }else{
+        }
+        else{
             CarService.updateCar(car, this.state.id)
             .then( res => {
                 if(res.status === 200) { toast.success('Samochód zmodyfikowany') }
@@ -130,69 +130,105 @@ class CarForm extends Component {
     getTitle(){
         if(this.state.id === '_add'){
             return <h2 className='text-center display-5 mb-3'>Dodaj Samochód</h2>
-        }else{
+        }
+        else{
             return <h2 className='text-center display-5 mb-3'>Zmodyfikuj Samochód</h2>
         }
     }
 
     render() {
         return (
-            <div>
-                <div className='forms'>
-                            <form>
-                                {this.getTitle()}
-                                        <div className = "form-group">
-                                            <label> Marka </label>
-                                            <input name="mark" className="form-control" 
-                                                value={this.state.mark} onChange={this.changeMarkHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Model </label>
-                                            <input name="model" className="form-control" 
-                                                value={this.state.model} onChange={this.changeModelHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Kolor </label>
-                                            <input name="color" className="form-control" 
-                                                value={this.state.color} onChange={this.changeColorHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Zdjęcie </label>
-                                            <input name="img" className="form-control" 
-                                                value={this.state.img} onChange={this.changeImgHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Cena </label>
-                                            <input name="price" className="form-control" 
-                                                value={this.state.price} onChange={this.changePriceHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Rok produkcji </label>
-                                            <input name="productionYear" className="form-control" 
-                                                value={this.state.productionYear} onChange={this.changeProductionYearHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> VIN </label>
-                                            <input name="vin" className="form-control" 
-                                                value={this.state.vin} onChange={this.changeVinHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Dostępność </label>
-                                            <input name="available" className="form-control" 
-                                                value={this.state.available} onChange={this.changeAvailableHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Rodzaj </label>
-                                            <input name="available" className="form-control" 
-                                                value={this.state.type} onChange={this.changeTypeHandler}/>
-                                        </div><br />
-                                        <Button size="md" variant="secondary" type="submit" onClick={this.saveOrUpdateCar}>Zapisz</Button>  
-                                        <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Anuluj</Button>                          
-                                </form>
-                            </div>  
-            </div>
+            <div className='forms'>
+                <form>
+                    {this.getTitle()}
+                    <div className = "form-group">
+                        <label> Marka </label>
+                        <input name="mark" 
+                            className="form-control" 
+                            value={this.state.mark} 
+                            onChange={this.changeMarkHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Model </label>
+                        <input name="model" 
+                            className="form-control" 
+                            value={this.state.model} 
+                            onChange={this.changeModelHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Kolor </label>
+                        <input name="color" 
+                            className="form-control" 
+                            value={this.state.color} 
+                            onChange={this.changeColorHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Zdjęcie </label>
+                        <input name="img" 
+                            className="form-control" 
+                            value={this.state.img} 
+                            onChange={this.changeImgHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Cena </label>
+                        <input name="price" 
+                            className="form-control" 
+                            value={this.state.price} 
+                            onChange={this.changePriceHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Rok produkcji </label>
+                        <input name="productionYear" 
+                            className="form-control" 
+                            value={this.state.productionYear} 
+                            onChange={this.changeProductionYearHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> VIN </label>
+                        <input name="vin" 
+                            className="form-control" 
+                            value={this.state.vin} 
+                            onChange={this.changeVinHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Dostępność </label>
+                        <input name="available" 
+                            className="form-control" 
+                            value={this.state.available} 
+                            onChange={this.changeAvailableHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Rodzaj </label>
+                        <input name="available" 
+                            className="form-control" 
+                            value={this.state.type} 
+                            onChange={this.changeTypeHandler}
+                        />
+                    </div><br />
+                    <Button size="md" 
+                        variant="secondary" 
+                        type="submit" 
+                        onClick={this.saveOrUpdateCar}>
+                        Zapisz
+                    </Button>  
+                    <Button style={{marginLeft: "10px"}} 
+                        size="md" 
+                        variant="danger" 
+                        type="submit" 
+                        onClick={this.cancel.bind(this)}>
+                        Anuluj
+                    </Button>                          
+                </form>
+            </div>  
         );
     }
 }
-
 export default CarForm;

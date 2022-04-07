@@ -3,7 +3,6 @@ import ClientService from '../services/ClientService';
 import { Button } from 'react-bootstrap';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-
 toast.configure()
 
 class Clients extends Component {
@@ -79,9 +78,26 @@ class Clients extends Component {
                                          <td> {client.address} </td>
                                          <td> {client.phoneNumber} </td>
                                          <td>
-                                            <Button onClick = { () => this.editClient(client.id)} size="sm" variant="secondary" type="submit">Modyfikuj</Button> 
-                                            <Button style={{marginLeft: "10px"}} onClick = { () => this.deleteClient(client.id)}  size="sm" variant="danger" type="submit">Usuń</Button> 
-                                            <Button style={{marginLeft: "10px"}} onClick = { () => this.viewClient(client.id)} size="sm" variant="primary" type="submit">Zobacz</Button> 
+                                            <Button onClick = { () => this.editClient(client.id)} 
+                                                size="sm" 
+                                                variant="secondary" 
+                                                type="submit">
+                                                Modyfikuj
+                                            </Button> 
+                                            <Button style={{marginLeft: "10px"}} 
+                                                onClick = { () => this.deleteClient(client.id)}  
+                                                size="sm" 
+                                                variant="danger" 
+                                                type="submit">
+                                                Usuń
+                                            </Button> 
+                                            <Button style={{marginLeft: "10px"}} 
+                                                onClick = { () => this.viewClient(client.id)} 
+                                                size="sm" 
+                                                variant="primary" 
+                                                type="submit">
+                                                Zobacz
+                                            </Button> 
                                          </td>
                                     </tr>
                                 )
@@ -89,7 +105,12 @@ class Clients extends Component {
                         </tbody>
                     </table>
                 </div>
-                <Button onClick={this.addClient} size="lg" variant="dark" type="submit">Dodaj Klienta</Button>                        
+                <Button onClick={this.addClient} 
+                    size="lg" 
+                    variant="dark"
+                    type="submit">
+                    Dodaj Klienta
+                </Button>                        
             </div>
         )
     }

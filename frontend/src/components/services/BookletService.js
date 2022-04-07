@@ -22,8 +22,6 @@ class BookletService {
 
     updateBooklet(booklet, bookletId){
         return axios.put(BOOKLET_API_BASE_URL + '/' + bookletId, booklet);
-    }
-  
+    }  
 }
-
 export default new BookletService()

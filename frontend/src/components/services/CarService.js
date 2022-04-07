@@ -23,7 +23,5 @@ class CarService {
     deleteCar(carId){
         return axios.delete(CAR_API_BASE_URL + '/' + carId);
     }
-  
 }
-
 export default new CarService()

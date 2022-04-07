@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap';
 import '../styles/FormStyle.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-
 toast.configure()
 
 class ClientForm extends Component {
@@ -38,7 +37,8 @@ class ClientForm extends Component {
     componentDidMount(){
         if(this.state.id === '_add'){
             return
-        }else{
+        }
+        else{
             ClientService.GetClientById(this.state.id).then( (res) =>{
                 let client = res.data;
                 this.setState({
@@ -49,8 +49,7 @@ class ClientForm extends Component {
                     password: client.password,
                     postalCode: client.postalCode,
                     address: client.address,
-                    phoneNumber: client.phoneNumber
-                    
+                    phoneNumber: client.phoneNumber 
                 });
             });
         }        
@@ -65,15 +64,25 @@ class ClientForm extends Component {
         if(this.state.id === '_add'){
             ClientService.createClient(client)
             .then(res =>{
-                if(res.status === 200) { toast.success('Klient dodany') }
-                else { toast.error("Klient nie dodany") }
+                if(res.status === 200) 
+                { 
+                    toast.success('Klient dodany') 
+                }
+                else 
+                { 
+                    toast.error("Klient nie dodany") 
+                }
                 this.props.history.push('/clients');
             })
             .catch(err => toast.error("Niepoprawne dane"));
-        }else{
+        }
+        else{
             ClientService.updateClient(client, this.state.id)
             .then( res => {
-                if(res.status === 200) { toast.success('Klient zmodyfikowany') }
+                if(res.status === 200) 
+                {
+                    toast.success('Klient zmodyfikowany') 
+                }
                 this.props.history.push('/clients');
             })
             .catch(err => toast.error("Niepoprawne dane"));
@@ -119,62 +128,96 @@ class ClientForm extends Component {
     getTitle(){
         if(this.state.id === '_add'){
             return <h2 className='text-center display-5 mb-3'>Dodaj Klienta</h2>
-        }else{
+        }
+        else{
             return <h2 className='text-center display-5 mb-3'>Zmodyfikuj Klienta</h2>
         }
     }
 
     render() {
         return (
-            <div>
-                <div className='forms'>
-                            <form>
-                                {this.getTitle()}
-                                <div className = "form-group">
-                                            <label> Imię </label>
-                                            <input name="firstName" className="form-control" 
-                                                value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Nazwisko </label>
-                                            <input name="lastName" className="form-control" 
-                                                value={this.state.lastName} onChange={this.changeLastNameHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Email </label>
-                                            <input name="email" className="form-control" 
-                                                value={this.state.email} onChange={this.changeEmailHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Login </label>
-                                            <input name="login" className="form-control" 
-                                                value={this.state.login} onChange={this.changeLoginHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Hasło </label>
-                                            <input name="password" className="form-control" 
-                                                value={this.state.password} onChange={this.changePasswordHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Kod pocztowy </label>
-                                            <input name="postalCode" className="form-control" 
-                                                value={this.state.postalCode} onChange={this.changePostalCodeHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Adres </label>
-                                            <input name="address" className="form-control" 
-                                                value={this.state.address} onChange={this.changeAddressHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Numer telefonu </label>
-                                            <input name="phoneNumber" className="form-control" 
-                                                value={this.state.phoneNumber} onChange={this.changePhoneNumberHandler}/>
-                                        </div><br />
-                                        <Button size="md" variant="secondary" type="submit" onClick={this.saveOrUpdateClient}>Zapisz</Button>  
-                                        <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Anuluj</Button>                          
-                                </form>
-                            </div>  
-            </div>
+            <div className='forms'>
+                <form>
+                    {this.getTitle()}
+                    <div className = "form-group">
+                        <label> Imię </label>
+                        <input name="firstName" 
+                            className="form-control" 
+                            value={this.state.firstName} 
+                            onChange={this.changeFirstNameHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Nazwisko </label>
+                        <input name="lastName" 
+                            className="form-control" 
+                            value={this.state.lastName} 
+                            onChange={this.changeLastNameHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Email </label>
+                        <input name="email" 
+                            className="form-control" 
+                            value={this.state.email} 
+                            onChange={this.changeEmailHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Login </label>
+                        <input name="login" 
+                            className="form-control" 
+                            value={this.state.login} 
+                            onChange={this.changeLoginHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Hasło </label>
+                        <input name="password" 
+                            className="form-control" 
+                            value={this.state.password} 
+                            onChange={this.changePasswordHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Kod pocztowy </label>
+                        <input name="postalCode" 
+                            className="form-control" 
+                            value={this.state.postalCode} 
+                            onChange={this.changePostalCodeHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Adres </label>
+                        <input name="address" 
+                            className="form-control" 
+                            value={this.state.address} 
+                            onChange={this.changeAddressHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Numer telefonu </label>
+                        <input name="phoneNumber" 
+                            className="form-control" 
+                            value={this.state.phoneNumber} 
+                            onChange={this.changePhoneNumberHandler}
+                        />
+                    </div><br />
+                    <Button size="md" 
+                        variant="secondary" 
+                        type="submit" 
+                        onClick={this.saveOrUpdateClient}>
+                        Zapisz
+                    </Button>  
+                    <Button style={{marginLeft: "10px"}} 
+                        size="md" 
+                        variant="danger" 
+                        type="submit" 
+                        onClick={this.cancel.bind(this)}>
+                        Anuluj
+                    </Button>                          
+                </form>
+            </div>  
         );
     }
 }

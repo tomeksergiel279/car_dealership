@@ -1,5 +1,4 @@
 import React from "react";
-import './Form.css';
 
 const AppFooter = () => (
   <div className="footer text-center">

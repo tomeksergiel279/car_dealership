@@ -26,43 +26,47 @@ class ClientView extends Component {
     render() {
         return (
             <div><br /><br />
-            <Card border="secondary" className='cards'>
-                <Card.Header><h3>{ this.state.client.firstName } { this.state.client.lastName } </h3></Card.Header>
-                <Card.Body>
-                    <Table>
-                        <tbody>
-                            <tr>
-                                <td>Email</td>
-                                <td>{ this.state.client.email }</td>
-                            </tr>
-                            <tr>
-                                <td>Login</td>
-                                <td>{ this.state.client.login }</td>
-                            </tr>
-                            <tr>
-                                <td>Hasło</td>
-                                <td>{ this.state.client.password }</td>
-                            </tr>
-                            <tr>
-                                <td>Kod pocztowy</td>
-                                <td>{ this.state.client.postalCode }</td>
-                            </tr>
-                            <tr>
-                                <td>Adres</td>
-                                <td>{ this.state.client.address }</td>
-                            </tr>
-                            <tr>
-                                <td>Numer telefonu</td>
-                                <td>{ this.state.client.phoneNumber }</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                    <Button size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Powrót</Button>
-                </Card.Body>
-            </Card>
+                <Card border="secondary" className='cards'>
+                    <Card.Header><h3>{ this.state.client.firstName } { this.state.client.lastName } </h3></Card.Header>
+                    <Card.Body>
+                        <Table>
+                            <tbody>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{ this.state.client.email }</td>
+                                </tr>
+                                <tr>
+                                    <td>Login</td>
+                                    <td>{ this.state.client.login }</td>
+                                </tr>
+                                <tr>
+                                    <td>Hasło</td>
+                                    <td>{ this.state.client.password }</td>
+                                </tr>
+                                <tr>
+                                    <td>Kod pocztowy</td>
+                                    <td>{ this.state.client.postalCode }</td>
+                                </tr>
+                                <tr>
+                                    <td>Adres</td>
+                                    <td>{ this.state.client.address }</td>
+                                </tr>
+                                <tr>
+                                    <td>Numer telefonu</td>
+                                    <td>{ this.state.client.phoneNumber }</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                        <Button size="md" 
+                            variant="danger" 
+                            type="submit" 
+                            onClick={this.cancel.bind(this)}>
+                            Powrót
+                        </Button>
+                    </Card.Body>
+                </Card>
             </div>
         )
     }
 }
-
 export default ClientView

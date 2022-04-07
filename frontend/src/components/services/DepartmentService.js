@@ -7,7 +7,5 @@ class DepartmentService {
     getDepartments(){
         return axios.get(DEPARTMENT_API_BASE_URL);
     }
-  
 }
-
 export default new DepartmentService()

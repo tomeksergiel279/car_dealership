@@ -4,8 +4,6 @@ import { Button } from 'react-bootstrap';
 import '../styles/FormStyle.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-
-
 toast.configure();
 
 class EmployeeForm extends Component {
@@ -37,7 +35,8 @@ class EmployeeForm extends Component {
     componentDidMount(){
         if(this.state.id === '_add'){
             return
-        }else{
+        }
+        else{
             EmployeeService.GetEmployeeById(this.state.id).then( (res) =>{
                 let employee = res.data;
                 this.setState({
@@ -62,15 +61,23 @@ class EmployeeForm extends Component {
         if(this.state.id === '_add'){
             EmployeeService.createEmployee(employee)
             .then(res =>{
-                if(res.status === 200) { toast.success('Pracownik dodany') }
-                else { toast.error("Pracownik nie dodany") }
+                if(res.status === 200) 
+                { 
+                    toast.success('Pracownik dodany')
+                }
+                else { 
+                    toast.error("Pracownik nie dodany") 
+                }
                 this.props.history.push('/employees');
             })
             .catch(err => toast.error("Niepoprawne dane"));
-        }else{
+        }
+        else{
             EmployeeService.UpdateEmployee(employee, this.state.id)
             .then( res => {
-                if(res.status === 200) { toast.success('Pracownik zmodyfikowany') }
+                if(res.status === 200) { 
+                    toast.success('Pracownik zmodyfikowany')
+                }
                 this.props.history.push('/employees');
             })
             .catch(err => toast.error("Niepoprawne dane"));
@@ -108,52 +115,80 @@ class EmployeeForm extends Component {
     getTitle(){
         if(this.state.id === '_add'){
             return <h2 className='text-center display-5 mb-3'>Dodaj Pracownika</h2>
-        }else{
+        }
+        else{
             return <h2 className='text-center display-5 mb-3'>Zmodyfikuj Pracownika</h2>
         }
     }
 
     render() {
         return (
-            <div>
-                <div className='forms'>
-                            <form>
-                                {this.getTitle()}
-                                <div className = "form-group">
-                                            <label> Imię </label>
-                                            <input name="firstName" className="form-control" 
-                                                value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Nazwisko </label>
-                                            <input name="lastName" className="form-control" 
-                                                value={this.state.lastName} onChange={this.changeLastNameHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Email </label>
-                                            <input name="email" className="form-control" 
-                                                value={this.state.email} onChange={this.changeEmailHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Login </label>
-                                            <input name="login" className="form-control" 
-                                                value={this.state.login} onChange={this.changeLoginHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Hasło </label>
-                                            <input name="password" className="form-control" 
-                                                value={this.state.password} onChange={this.changePasswordHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Numer telefonu </label>
-                                            <input name="phoneNumber" className="form-control" 
-                                                value={this.state.phoneNumber} onChange={this.changePhoneNumberHandler} />
-                                        </div><br />
-                                        <Button size="md" variant="secondary" type="submit" onClick={this.saveOrUpdateEmployee}>Zapisz</Button>  
-                                        <Button style={{marginLeft: "10px"}} size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Anuluj</Button>                          
-                                </form>
-                            </div>  
-            </div>
+            <div className='forms'>
+                <form>
+                    {this.getTitle()}
+                    <div className = "form-group">
+                        <label> Imię </label>
+                        <input name="firstName" 
+                            className="form-control" 
+                            value={this.state.firstName} 
+                            onChange={this.changeFirstNameHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Nazwisko </label>
+                        <input name="lastName" 
+                            className="form-control" 
+                            value={this.state.lastName} 
+                            onChange={this.changeLastNameHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Email </label>
+                        <input name="email" 
+                            className="form-control" 
+                            value={this.state.email} 
+                            onChange={this.changeEmailHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Login </label>
+                        <input name="login" 
+                            className="form-control" 
+                            value={this.state.login} 
+                            onChange={this.changeLoginHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Hasło </label>
+                        <input name="password" 
+                            className="form-control" 
+                            value={this.state.password} 
+                            onChange={this.changePasswordHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Numer telefonu </label>
+                        <input name="phoneNumber" 
+                            className="form-control" 
+                            value={this.state.phoneNumber} 
+                            onChange={this.changePhoneNumberHandler} 
+                        />
+                    </div><br />
+                    <Button size="md" 
+                        variant="secondary" 
+                        type="submit" 
+                        onClick={this.saveOrUpdateEmployee}>
+                        Zapisz
+                    </Button>  
+                    <Button style={{marginLeft: "10px"}} 
+                        size="md" 
+                        variant="danger" 
+                        type="submit" 
+                        onClick={this.cancel.bind(this)}>
+                        Anuluj
+                    </Button>                          
+                </form>
+            </div>  
         );
     }
 }

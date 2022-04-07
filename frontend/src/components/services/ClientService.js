@@ -23,7 +23,5 @@ class ClientService {
     deleteClient(clientId){
         return axios.delete(CLIENT_API_BASE_URL + '/' + clientId);
     }
-    
 }
-
 export default new ClientService()
