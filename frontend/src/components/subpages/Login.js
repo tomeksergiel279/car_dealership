@@ -29,12 +29,12 @@ export const Login = () => {
             password: password
     })
     .then((res) => {
-        localStorage.setItem('user', JSON.stringify({
-            "login": login,
-            "userType": userType
-        }));
-        toast.success("Udało się zalogować");
-        history.push("/home");
+            localStorage.setItem('user', JSON.stringify({
+                "login": login,
+                "userType": userType
+            }));
+            toast.success("Udało się zalogować");
+            history.push("/home");
     })
       .catch(err =>  toast.error("Błąd"))
   }

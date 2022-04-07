@@ -19,14 +19,15 @@ import AppFooter from './AppFooter';
 
 
 export const NavbarComp = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-
+    
     useEffect(() => {
         !user && window.location.replace("http://localhost:3000/login");
     }, []);
+
+    const user = JSON.parse(localStorage.getItem('user'));
     
     const handleLogout = () => {
-        localStorage.clear();
+        window.localStorage.clear();
         window.location.replace("http://localhost:3000/login");
     }
 
@@ -43,12 +44,12 @@ export const NavbarComp = () => {
                     <Nav.Link></Nav.Link>
                         
                         <Nav.Link className='d-flex' href="/cars">SAMOCHODY</Nav.Link>
-                        {  <Nav.Link href="/clients">KLIENCI</Nav.Link> }
-                        {  <Nav.Link href="/employees">PRACOWNICY</Nav.Link> } 
+                        { user.userType === 'employee' &&   <Nav.Link href="/clients">KLIENCI</Nav.Link> }
+                        { user.userType === 'employee' && <Nav.Link href="/employees">PRACOWNICY</Nav.Link> } 
                         <Nav.Link href="/departments">ODDZIAŁY</Nav.Link>
                         <Nav.Link href="/contact">KONTAKT</Nav.Link>
                         <Nav.Link /><Nav.Link /><Nav.Link /><Nav.Link /><Nav.Link />
-                        <Nav.Link href="/login">ZALOGUJ</Nav.Link> 
+                        { (user.userType === 'employee' || user.userType === 'client') && < Nav.Link onClick={handleLogout}>WYLOGUJ</Nav.Link> }
                     </Nav>
                     </Navbar.Collapse>
                 </div>
@@ -59,6 +60,7 @@ export const NavbarComp = () => {
                             <Route path = "/employees" component = {Employees}></Route>
                             <Route path = "/add-employee/:id" component = {EmployeeForm}></Route>
                             <Route path = "/view-employee/:id" component = {EmployeeView}></Route>
+                            <Route path = "/clients" component = {Clients}></Route>
                             <Route path = "/add-client/:id" component = {ClientForm}></Route>
                             <Route path = "/view-client/:id" component = {ClientView}></Route>
                             <Route path = "/booklet/:id" component = {Booklet}></Route>

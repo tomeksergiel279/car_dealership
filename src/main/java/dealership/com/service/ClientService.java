@@ -75,17 +75,17 @@ public class ClientService {
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestHeader("login") String login, @RequestHeader("password") String password) {
-        Optional<Client> clientFromDb = clientRepository.findByLogin(login);
+    public ResponseEntity login(@RequestBody Client client) {
+        Optional<Client> clientFromDb = clientRepository.findByLogin(client.getLogin());
 
-        if (clientFromDb.isEmpty() || !checkPassword(clientFromDb, password)) {
+        if (clientFromDb.isEmpty() || wrongPassword(clientFromDb, client)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         return ResponseEntity.ok().build();
     }
 
-    private boolean checkPassword(Optional<Client> clientFromDb, String password) {
-        return clientFromDb.get().getPassword().equals(password);
+    private boolean wrongPassword(Optional<Client> clientFromDb, Client client) {
+        return !clientFromDb.get().getPassword().equals(client.getPassword());
     }
 }

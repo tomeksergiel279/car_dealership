@@ -15,6 +15,8 @@ export const Cars = () => {
     const [type, setType] = useState("");
     const [price, setPrice] = useState("0, 500000");
 
+    const user = JSON.parse(localStorage.getItem('user'));
+
     useEffect(() => {
         CarService.getCars().then((res) => {
             setCars(res.data);
@@ -113,7 +115,7 @@ export const Cars = () => {
                     </Form.Select>
                 </Nav.Link>
         </Nav>
-        <Button onClick={addCar} style={{marginTop: "20px"}} size="lg" variant="dark" type="submit">Dodaj Samochód</Button>
+         { user.userType === 'employee' && <Button onClick={addCar} style={{marginTop: "20px"}} size="lg" variant="dark" type="submit">Dodaj Samochód</Button> }
         <Row>
         {
                 
@@ -150,12 +152,12 @@ export const Cars = () => {
                                                 <td>{car.type}</td>
                                             </tr>
                                             <tr>
-                                                <td colSpan={2}><Button onClick = { () => openBooklet(car.serviceBooklet.id)} size="md" variant="primary" type="submit">Książka serwisowa</Button></td>
+                                            { user.userType === 'employee' && <td colSpan={2}><Button onClick = { () => openBooklet(car.serviceBooklet.id)} size="md" variant="primary" type="submit">Książka serwisowa</Button></td> }
                                             </tr>
                                         </tbody>
                                     </Table>
-                                        <Button onClick = { () => editCar(car.id)} size="md" variant="secondary" type="submit">Modyfikuj</Button> 
-                                        <Button onClick = { () => deleteCar(car.id)} style={{marginLeft: "10px"}} size="md" variant="danger" type="submit">Usuń</Button> 
+                                        { user.userType === 'employee' && <Button onClick = { () => editCar(car.id)} size="md" variant="secondary" type="submit">Modyfikuj</Button> } 
+                                        { user.userType === 'employee' && <Button onClick = { () => deleteCar(car.id)} style={{marginLeft: "10px"}} size="md" variant="danger" type="submit">Usuń</Button> }
                                 </Card.Body>
                             </Card>        
                     )
