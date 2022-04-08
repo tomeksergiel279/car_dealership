@@ -4,8 +4,6 @@ import { Card, Table, Col, Row } from 'react-bootstrap';
 import '../styles/Department.css';
 
 
-
-
 class Departments extends Component {
     constructor(props) {
         super(props)
@@ -20,37 +18,34 @@ class Departments extends Component {
         });
     }
 
-    
-      
-
     render() {
         return (
             <div><br />
             <h2 className='text-center display-5 mb-3'>Oddziały</h2><br /> 
             <Row>
-                    {
-                        this.state.departments.map(
-                            department => 
-                                <Card key = {department.id} border="secondary" className='cards'>
-                                    <Card.Header><h3>{ department.name }</h3></Card.Header>
-                                    <Card.Body>
-                                        <Table>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Miasto</td>
-                                                    <td>{department.city}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Kod pocztowy</td>
-                                                    <td>{department.postalCode}</td>
-                                                </tr>
-                                            </tbody>
-                                        </Table>
-                                    </Card.Body>
-                                </Card>
-                        )
-                    }
-                </Row><br />
+                {
+                    this.state.departments.map(
+                        department => 
+                        <Card key = {department.id} border="secondary" className='cards'>
+                            <Card.Header><h3>{ department.name }</h3></Card.Header>
+                            <Card.Body>
+                                <Table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Miasto</td>
+                                            <td>{department.city}</td>
+                                        </tr>
+                                    <tr>
+                                            <td>Kod pocztowy</td>
+                                            <td>{department.postalCode}</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                            </Card.Body>
+                        </Card>
+                    )
+                }
+            </Row><br />
             <Row style={{paddingBottom: "100px"}}>
                 <Col>
                     <iframe
@@ -79,5 +74,4 @@ class Departments extends Component {
         )
     }
 }
-
 export default Departments;

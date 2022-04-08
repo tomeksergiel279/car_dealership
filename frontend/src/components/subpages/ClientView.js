@@ -57,12 +57,16 @@ class ClientView extends Component {
                             </tr>
                         </tbody>
                     </Table>
-                    <Button size="md" variant="danger" type="submit" onClick={this.cancel.bind(this)}>Powrót</Button>
+                    <Button size="md" 
+                        variant="danger" 
+                        type="submit" 
+                        onClick={this.cancel.bind(this)}>
+                        Powrót
+                    </Button>
                 </Card.Body>
             </Card>
             </div>
         )
     }
 }
-
 export default ClientView

@@ -55,5 +55,4 @@ class Homecarousel extends Component {
         );
     }
 }
-
 export default Homecarousel;

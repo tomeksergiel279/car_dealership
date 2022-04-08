@@ -3,8 +3,6 @@ import EmployeeService from '../services/EmployeeService';
 import { Button } from 'react-bootstrap';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-
-
 toast.configure()
 
 class Employees extends Component {
@@ -65,30 +63,51 @@ class Employees extends Component {
                         </thead>
                         <tbody>
                         {
-                                this.state.employees.map(
-                                    employee => 
-                                    <tr key = {employee.id}>
-                                         <td> {employee.firstName} </td>   
-                                         <td> {employee.lastName} </td>
-                                         <td> {employee.email} </td>
-                                         <td> {employee.login} </td>   
-                                         <td> {employee.password} </td>
-                                         <td> {employee.phoneNumber} </td>
-                                         <td>
-                                            <Button onClick = { () => this.editEmployee(employee.id)} size="sm" variant="secondary" type="submit">Modyfikuj</Button> 
-                                            <Button style={{marginLeft: "10px"}} onClick = { () => this.deleteEmployee(employee.id)}  size="sm" variant="danger" type="submit">Usuń</Button> 
-                                            <Button style={{marginLeft: "10px"}} onClick = { () => this.viewEmployee(employee.id)} size="sm" variant="primary" type="submit">Zobacz</Button>
-                                         </td>
-                                    </tr>
-                                )
+                            this.state.employees.map(
+                                employee => 
+                                <tr key = {employee.id}>
+                                     <td> {employee.firstName} </td>   
+                                     <td> {employee.lastName} </td>
+                                     <td> {employee.email} </td>
+                                     <td> {employee.login} </td>   
+                                     <td> {employee.password} </td>
+                                     <td> {employee.phoneNumber} </td>
+                                     <td>
+                                        <Button onClick = { () => this.editEmployee(employee.id)} 
+                                            size="sm" 
+                                            variant="secondary" 
+                                            type="submit">
+                                            Modyfikuj
+                                        </Button> 
+                                        <Button style={{marginLeft: "10px"}} 
+                                            onClick = { () => this.deleteEmployee(employee.id)}  
+                                            size="sm" 
+                                            variant="danger" 
+                                            type="submit">
+                                            Usuń
+                                        </Button> 
+                                        <Button style={{marginLeft: "10px"}} 
+                                            onClick = { () => this.viewEmployee(employee.id)} 
+                                            size="sm" 
+                                            variant="primary" 
+                                            type="submit">
+                                            Zobacz
+                                        </Button>
+                                    </td>
+                                </tr>
+                            )
                         }                  
                         </tbody>
                     </table>
                 </div>
-                <Button onClick={this.addEmployee} size="lg" variant="dark" type="submit">Dodaj Pracownika</Button>         
+                <Button onClick={this.addEmployee} 
+                    size="lg" 
+                    variant="dark" 
+                    type="submit">
+                    Dodaj Pracownika
+                </Button>         
             </div>
         )
     }
 }
-
 export default Employees;
