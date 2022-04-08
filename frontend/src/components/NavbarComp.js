@@ -61,17 +61,17 @@ export const NavbarComp = () => {
             <Router>
                 <div className="container">
                     <Switch> 
-                        <Route path = "/employees" component = {Employees} />
-                        <Route path = "/add-employee/:id" component = {EmployeeForm} />
-                        <Route path = "/view-employee/:id" component = {EmployeeView} />
-                        <Route path = "/clients" component = {Clients} />
-                        <Route path = "/add-client/:id" component = {ClientForm} />
-                        <Route path = "/view-client/:id" component = {ClientView} />
-                        <Route path = "/booklet/:id" component = {Booklet} />
-                        <Route path = "/booklet/:id" component = {Booklet} />
-                        <Route path = "/update-booklet/:id" component = {BookletForm} />
+                        { user.userType === 'employee' && <Route path = "/employees" component = {Employees} /> }
+                        { user.userType === 'employee' && <Route path = "/add-employee/:id" component = {EmployeeForm} /> }
+                        { user.userType === 'employee' && <Route path = "/view-employee/:id" component = {EmployeeView} /> }
+                        { user.userType === 'employee' && <Route path = "/clients" component = {Clients} /> }
+                        { user.userType === 'employee' && <Route path = "/add-client/:id" component = {ClientForm} /> }
+                        { user.userType === 'employee' && <Route path = "/view-client/:id" component = {ClientView} /> }
+                        { user.userType === 'employee' && <Route path = "/booklet/:id" component = {Booklet} /> }
+                        { user.userType === 'employee' && <Route path = "/booklet/:id" component = {Booklet} /> }
+                        { user.userType === 'employee' && <Route path = "/update-booklet/:id" component = {BookletForm} /> }
                         <Route path = "/cars" component = {Cars} />
-                        <Route path = "/add-car/:id" component = {CarForm} />
+                        { user.userType === 'employee' &&<Route path = "/add-car/:id" component = {CarForm} /> }
                         <Route path = "/departments" component = {Departments} />
                         <Route path = "/contact" component = {Contact} />
                     </Switch>  
@@ -84,5 +84,4 @@ export const NavbarComp = () => {
         </div>
     );
 }
-
 export default NavbarComp;
