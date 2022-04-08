@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
-import RouteAuthenticated from '../RouteAuthenticated';
 
 import Employees from './subpages/Employees';
 import EmployeeForm from './forms/EmployeeForm';
@@ -21,10 +20,15 @@ import AppFooter from './AppFooter';
 
 export const NavbarComp = () => {
 
-    const user = JSON.parse(localStorage.getItem('user'));
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
-        (!user && window.location.replace("http://localhost:3000/login"))
+        if(localStorage.getItem('user') === null){
+            window.location.replace("http://localhost:3000/login");
+        }else
+        {
+            setUser(JSON.parse(localStorage.getItem('user')));
+        }
     }, []);
 
     const handleLogout = () => {
@@ -57,17 +61,17 @@ export const NavbarComp = () => {
             <Router>
                 <div className="container">
                     <Switch> 
-                        <RouteAuthenticated path = "/employees" component = {Employees} />
-                        <RouteAuthenticated path = "/add-employee/:id" component = {EmployeeForm} />
-                        <RouteAuthenticated path = "/view-employee/:id" component = {EmployeeView} />
-                        <RouteAuthenticated path = "/clients" component = {Clients} />
-                        <RouteAuthenticated path = "/add-client/:id" component = {ClientForm} />
-                        <RouteAuthenticated path = "/view-client/:id" component = {ClientView} />
-                        <RouteAuthenticated path = "/booklet/:id" component = {Booklet} />
-                        <RouteAuthenticated path = "/booklet/:id" component = {Booklet} />
-                        <RouteAuthenticated path = "/update-booklet/:id" component = {BookletForm} />
+                        <Route path = "/employees" component = {Employees} />
+                        <Route path = "/add-employee/:id" component = {EmployeeForm} />
+                        <Route path = "/view-employee/:id" component = {EmployeeView} />
+                        <Route path = "/clients" component = {Clients} />
+                        <Route path = "/add-client/:id" component = {ClientForm} />
+                        <Route path = "/view-client/:id" component = {ClientView} />
+                        <Route path = "/booklet/:id" component = {Booklet} />
+                        <Route path = "/booklet/:id" component = {Booklet} />
+                        <Route path = "/update-booklet/:id" component = {BookletForm} />
                         <Route path = "/cars" component = {Cars} />
-                        <RouteAuthenticated path = "/add-car/:id" component = {CarForm} />
+                        <Route path = "/add-car/:id" component = {CarForm} />
                         <Route path = "/departments" component = {Departments} />
                         <Route path = "/contact" component = {Contact} />
                     </Switch>  
