@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "https://car-dealership-pk.netlify.app")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/servicebooklet")
 public class ServiceBookletService {
