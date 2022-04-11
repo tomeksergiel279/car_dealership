@@ -24,7 +24,7 @@ export const NavbarComp = () => {
 
     useEffect(() => {
         if(localStorage.getItem('user') === null){
-            window.location.replace("https://car-dealership-pk.netlify.app/login");
+            window.location.replace("http://localhost:3000/login");
         }else
         {
             setUser(JSON.parse(localStorage.getItem('user')));
@@ -33,7 +33,7 @@ export const NavbarComp = () => {
 
     const handleLogout = () => {
         window.localStorage.clear();
-        window.location.replace("https://car-dealership-pk.netlify.app/login");
+        window.location.replace("http://localhost:3000/login");
     }
 
     return (

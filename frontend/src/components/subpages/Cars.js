@@ -43,15 +43,15 @@ export const Cars = () => {
     }
 
     const addCar = () => {
-        window.location.replace('https://car-dealership-pk.netlify.app/add-car/_add');
+        window.location.replace('http://localhost:3000/add-car/_add');
     }
 
     const openBooklet = (id) => {
-        window.location.replace(`https://car-dealership-pk.netlify.app/${id}`);
+        window.location.replace(`http://localhost:3000/booklet/${id}`);
     }
 
     const editCar = (id) => {
-        window.location.replace(`https://car-dealership-pk.netlify.app/${id}`);
+        window.location.replace(`http://localhost:3000/add-car/${id}`);
     }
 
     return (
