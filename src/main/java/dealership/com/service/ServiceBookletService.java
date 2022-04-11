@@ -1,5 +1,4 @@
 package dealership.com.service;
-
 import dealership.com.exception.ResourceNotFoundException;
 import dealership.com.model.Car;
 import dealership.com.model.ServiceBooklet;
@@ -15,7 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = "https://car-dealership-pk.netlify.app")
 @RestController
 @RequestMapping("/servicebooklet")
-public class ServiceBoolketService {
+public class ServiceBookletService {
 
     @Autowired
     ServiceBookletRepository serviceBookletRepository;

@@ -47,7 +47,7 @@ export const Cars = () => {
     }
 
     const openBooklet = (id) => {
-        window.location.replace(`https://car-dealership-pk.netlify.app/booklet/${id}`);
+        window.location.replace(`https://car-dealership-pk.netlify.app//servicebooklet/${id}`);
     }
 
     const editCar = (id) => {
