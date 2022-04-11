@@ -1,6 +1,10 @@
 package dealership.com.service;
+
+import dealership.com.exception.ResourceAlreadyExist;
 import dealership.com.exception.ResourceNotFoundException;
 import dealership.com.model.Car;
+import dealership.com.model.Department;
+import dealership.com.model.Employee;
 import dealership.com.model.ServiceBooklet;
 import dealership.com.repository.CarRepository;
 import dealership.com.repository.ServiceBookletRepository;
@@ -10,11 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://car-dealership-pk.netlify.app")
 @RestController
 @RequestMapping("/servicebooklet")
-public class ServiceBookletService {
+public class ServiceBoolketService {
 
     @Autowired
     ServiceBookletRepository serviceBookletRepository;
