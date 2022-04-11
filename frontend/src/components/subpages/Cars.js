@@ -47,11 +47,11 @@ export const Cars = () => {
     }
 
     const openBooklet = (id) => {
-        window.location.replace(`https://car-dealership-pk.netlify.app/${id}`);
+        window.location.replace(`https://car-dealership-pk.netlify.app/add-car/${id}`);
     }
 
     const editCar = (id) => {
-        window.location.replace(`https://car-dealership-pk.netlify.app/${id}`);
+        window.location.replace(`https://car-dealership-pk.netlify.app/add-car/${id}`);
     }
 
     return (
@@ -66,6 +66,9 @@ export const Cars = () => {
                     <option value="audi">Audi</option>
                     <option value="mercedes">Mercedes</option>
                     <option value="volkswagen">Volkswagen</option>
+                    <option value="bmw">BMW</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="opel">Opel</option>
                 </Form.Select>
             </Nav.Link>
             <Nav.Link  style={{width: '20%'}}>
