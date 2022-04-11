@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "https://car-dealership-pk.netlify.app")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/servicebooklet")
-public class ServiceBoolketService {
+public class ServiceBookletService {
 
     @Autowired
     ServiceBookletRepository serviceBookletRepository;
@@ -63,6 +63,7 @@ public class ServiceBoolketService {
         return ResponseEntity.ok(updateServiceBooklet);
     }
 
+
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteServiceBooklet(@PathVariable("id") long id){
 
@@ -72,4 +73,6 @@ public class ServiceBoolketService {
         serviceBookletRepository.delete(serviceBooklet);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
 }
