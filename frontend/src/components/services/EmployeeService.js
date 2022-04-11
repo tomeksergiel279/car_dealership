@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const EMPLOYEE_API_BASE_URL = "http://localhost:8008/employee";
+const EMPLOYEE_API_BASE_URL = "https://car-dealership-pk.herokuapp.com/employee";
 
 class EmployeeService {
 
