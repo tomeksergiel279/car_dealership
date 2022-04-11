@@ -1,34 +1,70 @@
-package dealership.com.model;
+package dealership.com.service;
+import dealership.com.exception.ResourceNotFoundException;
+import dealership.com.model.Car;
+import dealership.com.model.ServiceBooklet;
+import dealership.com.repository.CarRepository;
+import dealership.com.repository.ServiceBookletRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.List;
 
-import lombok.*;
-import javax.persistence.*;
-import java.util.Date;
+@CrossOrigin(origins = "https://car-dealership-pk.netlify.app")
+@RestController
+@RequestMapping("/servicebooklet")
+public class ServiceBookletService {
 
+    @Autowired
+    ServiceBookletRepository serviceBookletRepository;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@Getter
-@Setter
-@Entity
-@Table(name="service_booklet")
-public class ServiceBooklet {
+    @Autowired
+    CarRepository carRepository;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GetMapping
+    public List<ServiceBooklet> getAllServiceBooklets(){
+        return serviceBookletRepository.findAll();
+    }
 
-    //jedna książka dla jednego samochodu
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_id", unique = true, nullable = false)
-    @JsonBackReference
-    private Car car_booklet;
+    @GetMapping("{id}")
+    public ResponseEntity<ServiceBooklet> getServiceBookletById(@PathVariable("id")  long id){
+        ServiceBooklet serviceBooklet = serviceBookletRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("ServiceBooklet not exist with id:" + id));
 
-    @Column(name = "service_inspection")
-    private String serviceInspection;
+        return ResponseEntity.ok(serviceBooklet);
+    }
 
-    @Column(name = "last_repair")
-    private String lastRepair;
+    @PostMapping
+    public ServiceBooklet addServiceBooklet(@RequestBody ServiceBooklet serviceBooklet, @RequestHeader("vin") String vin) {
+
+        Car car = carRepository.findByVin(vin)
+                .orElseThrow(() -> new ResourceNotFoundException("Car not exist with vin:" + vin));
+
+        serviceBooklet.setCar_booklet(car);
+        return serviceBookletRepository.save(serviceBooklet);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ServiceBooklet> updateServiceBooklet(@PathVariable long id, @RequestBody ServiceBooklet serviceBooklet) {
+        ServiceBooklet updateServiceBooklet = serviceBookletRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("ServiceBooklet not exist with id: " + id));
+
+        updateServiceBooklet.setServiceInspection(serviceBooklet.getServiceInspection());
+        updateServiceBooklet.setLastRepair(serviceBooklet.getLastRepair());
+
+        serviceBookletRepository.save(updateServiceBooklet);
+
+        return ResponseEntity.ok(updateServiceBooklet);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<HttpStatus> deleteServiceBooklet(@PathVariable("id") long id){
+
+        ServiceBooklet serviceBooklet = serviceBookletRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("ServiceBooklet not exist with id:" + id));
+
+        serviceBookletRepository.delete(serviceBooklet);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
