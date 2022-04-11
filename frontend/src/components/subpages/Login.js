@@ -16,7 +16,7 @@ export const Login = () => {
     const loginHandler = (e) => {
     e.preventDefault()
 
-    let path = 'http://localhost:8008/' + userType + '/login';
+    let path = 'https://car-dealership-pk.herokuapp.com/' + userType + '/login';
 
     console.log(login, password, userType, path);
 
