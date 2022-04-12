@@ -80,7 +80,10 @@ class CarForm extends Component {
         else{
             CarService.updateCar(car, this.state.id)
             .then( res => {
-                if(res.status === 200) { toast.success('Samochód zmodyfikowany') }
+                if(res.status === 200) {
+                    toast.success('Samochód zmodyfikowany');
+                    BookletService.createBooklet(booklet,this.state.vin);
+                }
                 this.props.history.push('/cars');
             })
             .catch(err => toast.error("Niepoprawne dane"));
