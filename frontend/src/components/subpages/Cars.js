@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 toast.configure()
 
 export const Cars = () => {
+    const [user, setUser] = useState([]);
     const [cars, setCars] = useState([]);
     const [mark, setMark] = useState("");
     const [available, setAvailable] = useState("");
@@ -18,6 +19,7 @@ export const Cars = () => {
     useEffect(() => {
         CarService.getCars().then((res) => {
             setCars(res.data);
+            setUser(JSON.parse(localStorage.getItem('user')));
         });
     },[])
 
@@ -116,7 +118,7 @@ export const Cars = () => {
                     </Form.Select>
                 </Nav.Link>
         </Nav>
-        <Button onClick={addCar} style={{marginTop: "20px"}} size="lg" variant="dark" type="submit">Dodaj Samochód</Button>
+        { user.userType === 'employee' &&<Button onClick={addCar} style={{marginTop: "20px"}} size="lg" variant="dark" type="submit">Dodaj Samochód</Button> }
         <Row>
         {
                 
@@ -154,29 +156,29 @@ export const Cars = () => {
                                         </tr>
                                         <tr>
                                             <td colSpan={2}>
-                                                <Button onClick = { () => openBooklet(car.serviceBooklet.id)} 
+                                            { user.userType === 'employee' && <Button onClick = { () => openBooklet(car.serviceBooklet.id)} 
                                                     size="md" 
                                                     variant="primary" 
                                                     type="submit">
                                                     Książka serwisowa
-                                                </Button>
+                                                </Button> }
                                             </td>
                                         </tr>
                                     </tbody>
                                 </Table>
-                                <Button onClick = { () => editCar(car.id)} 
+                                { user.userType === 'employee' && <Button onClick = { () => editCar(car.id)} 
                                     size="md" 
                                     variant="secondary" 
                                     type="submit">
                                     Modyfikuj
-                                </Button> 
-                                <Button onClick = { () => deleteCar(car.id)} 
+                                </Button> }
+                                { user.userType === 'employee' &&<Button onClick = { () => deleteCar(car.id)} 
                                     style={{marginLeft: "10px"}} 
                                     size="md" 
                                     variant="danger" 
                                     type="submit">
                                     Usuń
-                                </Button> 
+                                </Button> }
                             </Card.Body>
                         </Card>        
                     )
