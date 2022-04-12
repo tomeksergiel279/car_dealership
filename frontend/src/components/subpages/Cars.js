@@ -71,6 +71,8 @@ export const Cars = () => {
                     <option value="bmw">BMW</option>
                     <option value="fiat">Fiat</option>
                     <option value="opel">Opel</option>
+                    <option value="renault">Renault</option>
+                    <option value="hyundai">Hyundai</option>
                 </Form.Select>
             </Nav.Link>
             <Nav.Link  style={{width: '20%'}}>
@@ -102,6 +104,7 @@ export const Cars = () => {
                         <option value="zielony">Zielony</option>
                         <option value="czerwony">Czerwony</option>
                         <option value="niebieski">Niebieski</option>
+                        <option value="brązowy">Brązowy</option>
                     </Form.Select>
                 </Nav.Link>
                 <Nav.Link style={{width: '20%'}}>
