@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap';
 import '../styles/FormStyle.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import BookletService from '../services/BookletService';
+
 toast.configure()
 
 class CarForm extends Component {
@@ -71,7 +73,10 @@ class CarForm extends Component {
         if(this.state.id === '_add'){
             CarService.createCar(car)
             .then(res =>{
-                if(res.status === 200) { toast.success('Samochód dodany') }
+                if(res.status === 200) { 
+                    toast.success('Samochód dodany');
+                    BookletService.createBooklet(booklet,this.state.vin); 
+                }
                 else { toast.error("Samochód nie dodany") }
                 this.props.history.push('/cars');
             })
@@ -82,7 +87,6 @@ class CarForm extends Component {
             .then( res => {
                 if(res.status === 200) {
                     toast.success('Samochód zmodyfikowany');
-                    BookletService.createBooklet(booklet,this.state.vin);
                 }
                 this.props.history.push('/cars');
             })

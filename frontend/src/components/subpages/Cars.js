@@ -47,7 +47,7 @@ export const Cars = () => {
     }
 
     const openBooklet = (id) => {
-        window.location.replace(`https://car-dealership-pk.netlify.app//servicebooklet/${id}`);
+        window.location.replace(`https://car-dealership-pk.netlify.app/booklet/${id}`);
     }
 
     const editCar = (id) => {
@@ -154,7 +154,7 @@ export const Cars = () => {
                                         </tr>
                                         <tr>
                                             <td colSpan={2}>
-                                                <Button onClick = { () => openBooklet(car.id)} 
+                                                <Button onClick = { () => openBooklet(car.serviceBooklet.id)} 
                                                     size="md" 
                                                     variant="primary" 
                                                     type="submit">

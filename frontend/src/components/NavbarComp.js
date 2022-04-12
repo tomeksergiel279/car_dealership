@@ -68,7 +68,6 @@ export const NavbarComp = () => {
                         { user.userType === 'employee' && <Route path = "/add-client/:id" component = {ClientForm} /> }
                         { user.userType === 'employee' && <Route path = "/view-client/:id" component = {ClientView} /> }
                         { user.userType === 'employee' && <Route path = "/booklet/:id" component = {Booklet} /> }
-                        { user.userType === 'employee' && <Route path = "/booklet/:id" component = {Booklet} /> }
                         { user.userType === 'employee' && <Route path = "/update-booklet/:id" component = {BookletForm} /> }
                         <Route path = "/cars" component = {Cars} />
                         { user.userType === 'employee' &&<Route path = "/add-car/:id" component = {CarForm} /> }
