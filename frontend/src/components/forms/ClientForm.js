@@ -145,6 +145,7 @@ class ClientForm extends Component {
                             className="form-control" 
                             value={this.state.firstName} 
                             onChange={this.changeFirstNameHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -153,6 +154,7 @@ class ClientForm extends Component {
                             className="form-control" 
                             value={this.state.lastName} 
                             onChange={this.changeLastNameHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -161,6 +163,7 @@ class ClientForm extends Component {
                             className="form-control" 
                             value={this.state.email} 
                             onChange={this.changeEmailHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -169,6 +172,7 @@ class ClientForm extends Component {
                             className="form-control" 
                             value={this.state.login} 
                             onChange={this.changeLoginHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -177,6 +181,7 @@ class ClientForm extends Component {
                             className="form-control" 
                             value={this.state.password} 
                             onChange={this.changePasswordHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -185,6 +190,7 @@ class ClientForm extends Component {
                             className="form-control" 
                             value={this.state.postalCode} 
                             onChange={this.changePostalCodeHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -193,6 +199,7 @@ class ClientForm extends Component {
                             className="form-control" 
                             value={this.state.address} 
                             onChange={this.changeAddressHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -201,6 +208,7 @@ class ClientForm extends Component {
                             className="form-control" 
                             value={this.state.phoneNumber} 
                             onChange={this.changePhoneNumberHandler}
+                            required 
                         />
                     </div><br />
                     <Button size="md" 

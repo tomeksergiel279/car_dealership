@@ -60,6 +60,7 @@ public class CarService {
         updateCar.setPrice(car.getPrice());
         updateCar.setAvailable(car.getAvailable());
         updateCar.setType(car.getType());
+        updateCar.setReservation(car.getReservation());
 
         carRepository.save(updateCar);
 

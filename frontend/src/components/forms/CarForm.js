@@ -23,6 +23,7 @@ class CarForm extends Component {
             vin: '',
             available: '',
             type: '',
+            reservation: '',
             booklet: []
         }
 
@@ -35,6 +36,7 @@ class CarForm extends Component {
         this.changeVinHandler = this.changeVinHandler.bind(this);
         this.changeAvailableHandler = this.changeAvailableHandler.bind(this);
         this.changeTypeHandler = this.changeTypeHandler.bind(this);
+        this.changeReservationHandler = this.changeReservationHandler.bind(this);
         this.saveOrUpdateCar = this.saveOrUpdateCar.bind(this);
     }
 
@@ -54,7 +56,8 @@ class CarForm extends Component {
                     productionYear: car.productionYear,
                     vin: car.vin,
                     available: car.available,
-                    type: car.type
+                    type: car.type,
+                    reservation: car.reservation
                 });
             })
         }        
@@ -64,7 +67,7 @@ class CarForm extends Component {
         e.preventDefault();
         let car = {mark: this.state.mark, model: this.state.model, color: this.state.color,
             img: this.state.img, price: this.state.price, productionYear: this.state.productionYear, vin: this.state.vin, 
-            available: this.state.available, type: this.state.type};
+            available: this.state.available, type: this.state.type, reservation: this.state.reservation};
         console.log('car => ' + JSON.stringify(car));
 
         let booklet = { serviceInspection:"2000-01-01", repair:"brak",  repairDate:"brak",  repairProducent:"brak"}
@@ -130,6 +133,10 @@ class CarForm extends Component {
         this.setState({type: event.target.value});
     }
 
+    changeReservationHandler = (event) => {
+        this.setState({reservation: event.target.value});
+    }
+
     cancel(){
         this.props.history.push('/cars');
     }
@@ -154,6 +161,7 @@ class CarForm extends Component {
                             className="form-control" 
                             value={this.state.mark} 
                             onChange={this.changeMarkHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -162,6 +170,7 @@ class CarForm extends Component {
                             className="form-control" 
                             value={this.state.model} 
                             onChange={this.changeModelHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -170,6 +179,7 @@ class CarForm extends Component {
                             className="form-control" 
                             value={this.state.color} 
                             onChange={this.changeColorHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -178,6 +188,7 @@ class CarForm extends Component {
                             className="form-control" 
                             value={this.state.img} 
                             onChange={this.changeImgHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -186,6 +197,7 @@ class CarForm extends Component {
                             className="form-control" 
                             value={this.state.price} 
                             onChange={this.changePriceHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -194,6 +206,7 @@ class CarForm extends Component {
                             className="form-control" 
                             value={this.state.productionYear} 
                             onChange={this.changeProductionYearHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -202,6 +215,7 @@ class CarForm extends Component {
                             className="form-control" 
                             value={this.state.vin} 
                             onChange={this.changeVinHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -210,14 +224,25 @@ class CarForm extends Component {
                             className="form-control" 
                             value={this.state.available} 
                             onChange={this.changeAvailableHandler}
+                            required 
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Rezerwacja </label>
+                        <input name="reservation" 
+                            className="form-control" 
+                            value={this.state.reservation} 
+                            onChange={this.changeReservationHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
                         <label> Rodzaj </label>
-                        <input name="available" 
+                        <input name="type" 
                             className="form-control" 
                             value={this.state.type} 
                             onChange={this.changeTypeHandler}
+                            required 
                         />
                     </div><br />
                     <Button size="md" 

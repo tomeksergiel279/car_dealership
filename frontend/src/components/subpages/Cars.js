@@ -154,6 +154,10 @@ export const Cars = () => {
                                             <td>{car.available}</td>
                                         </tr>
                                         <tr>
+                                            <td>Rezerwacja</td>
+                                            <td>{car.reservation}</td>
+                                        </tr>
+                                        <tr>
                                             <td>Rodzaj</td>
                                             <td>{car.type}</td>
                                         </tr>

@@ -87,6 +87,7 @@ class BookletForm extends Component {
                             className="form-control" 
                             value={this.state.serviceInspection} 
                             onChange={this.changeServiceInspectionHandler}
+                            required 
                         />
                     </div>                        
                     <div className = "form-group">
@@ -95,6 +96,7 @@ class BookletForm extends Component {
                             className="form-control" 
                             value={this.state.repair} 
                             onChange={this.changeRepairHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -103,6 +105,7 @@ class BookletForm extends Component {
                             className="form-control" 
                             value={this.state.repairDate} 
                             onChange={this.changeRepairDateHandler}
+                            required 
                         />
                     </div>
                     <div className = "form-group">
@@ -111,6 +114,7 @@ class BookletForm extends Component {
                             className="form-control" 
                             value={this.state.repairProducent} 
                             onChange={this.changeRepairProducentHandler}
+                            required 
                         />
                     </div><br />
                     <Button size="md"
