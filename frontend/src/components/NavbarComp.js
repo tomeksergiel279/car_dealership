@@ -12,10 +12,10 @@ import Home from './subpages/Home';
 import CarForm from './forms/CarForm';
 import Contact from './subpages/Contact';
 import Departments from './subpages/Departments';   
-import Booklet from './subpages/Booklet';
 import BookletForm from './forms/BookletForm';
 import { Cars } from './subpages/Cars';
 import AppFooter from './AppFooter';
+import { Booklet } from './subpages/Booklet';
 
 
 export const NavbarComp = () => {
@@ -67,7 +67,7 @@ export const NavbarComp = () => {
                         { user.userType === 'employee' && <Route path = "/clients" component = {Clients} /> }
                         { user.userType === 'employee' && <Route path = "/add-client/:id" component = {ClientForm} /> }
                         { user.userType === 'employee' && <Route path = "/view-client/:id" component = {ClientView} /> }
-                        { user.userType === 'employee' && <Route path = "/booklet/:id" component = {Booklet} /> }
+                        <Route path = "/booklet/:id" component = {Booklet} /> 
                         { user.userType === 'employee' && <Route path = "/update-booklet/:id" component = {BookletForm} /> }
                         <Route path = "/cars" component = {Cars} />
                         { user.userType === 'employee' &&<Route path = "/add-car/:id" component = {CarForm} /> }

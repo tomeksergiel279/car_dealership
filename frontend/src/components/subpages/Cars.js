@@ -159,12 +159,12 @@ export const Cars = () => {
                                         </tr>
                                         <tr>
                                             <td colSpan={2}>
-                                            { user.userType === 'employee' && <Button onClick = { () => openBooklet(car.serviceBooklet.id)} 
+                                                <Button onClick = { () => openBooklet(car.serviceBooklet.id)} 
                                                     size="md" 
                                                     variant="primary" 
                                                     type="submit">
                                                     Książka serwisowa
-                                                </Button> }
+                                                </Button> 
                                             </td>
                                         </tr>
                                     </tbody>

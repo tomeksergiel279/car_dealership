@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import BookletService from '../services/BookletService';
 import { Button, Card, Table } from 'react-bootstrap';
 import emailjs from "emailjs-com";
@@ -7,19 +7,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 toast.configure()
 
-class Booklet extends Component {
-    constructor(props) {
-        super(props)
+export const Booklet = (props) => {
 
-        this.state = {
-            id: this.props.match.params.id,
-            booklet: {}
-        }
+    const id = props.match.params.id;
+    const [user, setUser] = useState([]);
+    const [booklet, setBooklet] = useState([]);
 
-        this.editBooklet = this.editBooklet.bind(this);
-    }
+    useEffect(() => {
+        BookletService.getBookletById(id).then((res) => {
+            setBooklet(res.data);
+            setUser(JSON.parse(localStorage.getItem('user')));
+        });
+    },[])
 
-    sendEmail(e) {
+    const sendEmail = (e) => {
         e.preventDefault();
 
         emailjs
@@ -39,21 +40,15 @@ class Booklet extends Component {
         e.target.reset()
     }
 
-    componentDidMount(){
-        BookletService.getBookletById(this.state.id).then( res => {
-            this.setState({booklet: res.data});
-        })
+
+    const editBooklet = (id) => {
+        window.location.replace(`http://localhost:3000/update-booklet/${id}`);
     }
 
-    editBooklet(id){
-        this.props.history.push(`/update-booklet/${id}`);
+    const cancel = () => {
+        window.location.replace(`http://localhost:3000/cars`);
     }
 
-    cancel(){
-        this.props.history.push('/cars');
-    }
-
-    render() {
         return (
             <div><br /><br />
                 <Card border="secondary" className='cards'>
@@ -63,36 +58,36 @@ class Booklet extends Component {
                             <tbody>
                                 <tr>
                                     <td>Data przeglądu</td>
-                                    <td>{ this.state.booklet.serviceInspection }</td>
+                                    <td>{ booklet.serviceInspection }</td>
                                 </tr>
                                 <tr>
                                     <td>Naprawy</td>
-                                    <td>{ this.state.booklet.repair }</td>
+                                    <td>{ booklet.repair }</td>
                                 </tr>
                                 <tr>
                                     <td>Data naprawy</td>
-                                    <td>{ this.state.booklet.repairDate }</td>
+                                    <td>{ booklet.repairDate }</td>
                                 </tr>
                                 <tr>
                                     <td>Producent części</td>
-                                    <td>{ this.state.booklet.repairProducent }</td>
+                                    <td>{ booklet.repairProducent }</td>
                                 </tr>
                             </tbody> 
                         </Table>
-                        <Button onClick = { () => this.editBooklet(this.state.booklet.id)} 
+                        { user.userType === 'employee' && <Button onClick = { () => editBooklet(booklet.id)} 
                             size="md" 
                             variant="secondary" 
                             type="submit">
                             Modyfikuj
-                        </Button>
+                        </Button> }
                         <Button style={{marginLeft: "10px"}} 
                             size="md" 
                             variant="danger" 
                             type="submit" 
-                            onClick={this.cancel.bind(this)}>
+                            onClick={cancel}>
                             Powrót
                         </Button><br /><br />
-                        <form onSubmit={this.sendEmail} className='contact_form w-100'>
+                        { user.userType === 'employee' && <form onSubmit={sendEmail} className='contact_form w-100'>
                             <div className = "form-group">
                                 <label> Imię </label>
                                 <input name="client" className="form-control" />
@@ -114,11 +109,10 @@ class Booklet extends Component {
                                 type="submit">
                                 Wyślij powiadomienie o badaniu
                             </Button> 
-                        </form>
+                        </form> }
                     </Card.Body>
                 </Card>
             </div>
         )
-    }
+    
 }
-export default Booklet
