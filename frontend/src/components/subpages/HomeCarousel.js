@@ -32,8 +32,8 @@ class Homecarousel extends Component {
                             height="300px"
                         />
                         <Carousel.Caption>
-                        <h1><Link to="/employees"><IoIosPerson /></Link></h1>
-                        <h3 className="display-4">Przeglądaj naszych pracowników</h3>
+                        <h1><Link to="/contact"><IoIosPerson /></Link></h1>
+                        <h3 className="display-4">Skontaktuj się z nami</h3>
                         <br />
                         </Carousel.Caption>
                     </Carousel.Item>

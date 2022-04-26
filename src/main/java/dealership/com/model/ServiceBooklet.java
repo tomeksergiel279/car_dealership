@@ -29,6 +29,12 @@ public class ServiceBooklet {
     @Column(name = "service_inspection")
     private String serviceInspection;
 
-    @Column(name = "last_repair")
-    private String lastRepair;
+    @Column(name = "repair")
+    private String repair;
+
+    @Column(name = "repair_date")
+    private String repairDate;
+
+    @Column(name = "repair_producent")
+    private String repairProducent;
 }

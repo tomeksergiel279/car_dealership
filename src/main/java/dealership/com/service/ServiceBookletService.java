@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "https://car-dealership-pk.netlify.app")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/servicebooklet")
 public class ServiceBookletService {
@@ -56,7 +56,9 @@ public class ServiceBookletService {
                 .orElseThrow(() -> new ResourceNotFoundException("ServiceBooklet not exist with id: " + id));
 
         updateServiceBooklet.setServiceInspection(serviceBooklet.getServiceInspection());
-        updateServiceBooklet.setLastRepair(serviceBooklet.getLastRepair());
+        updateServiceBooklet.setRepair(serviceBooklet.getRepair());
+        updateServiceBooklet.setRepairDate(serviceBooklet.getRepairDate());
+        updateServiceBooklet.setRepairProducent(serviceBooklet.getRepairProducent());
 
         serviceBookletRepository.save(updateServiceBooklet);
 

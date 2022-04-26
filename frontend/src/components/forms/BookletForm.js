@@ -13,11 +13,15 @@ class BookletForm extends Component {
         this.state = {
             id: this.props.match.params.id,
             serviceInspection: '',
-            lastRepair: ''
+            repair: '',
+            repairDate: '',
+            repairProducent: ''
         }
 
-        this.changeLastRepairHandler = this.changeLastRepairHandler.bind(this);
+        this.changeRepairHandler = this.changeRepairHandler.bind(this);
         this.changeServiceInspectionHandler = this.changeServiceInspectionHandler.bind(this);
+        this.changeRepairDateHandler = this.changeRepairDateHandler.bind(this);
+        this.changeRepairProducentHandler = this.changeRepairProducentHandler.bind(this);
         this.updateBooklet = this.updateBooklet.bind(this);
     }
 
@@ -26,14 +30,17 @@ class BookletForm extends Component {
             let booklet = res.data;
             this.setState({
                 serviceInspection: booklet.serviceInspection,
-                lastRepair: booklet.lastRepair          
+                repair: booklet.repair,
+                repairDate: booklet.repairDate,
+                repairProducent: booklet.repairProducent
+
             });
         });
     }  
 
     updateBooklet = (e) => {
         e.preventDefault();
-        let booklet = {serviceInspection: this.state.serviceInspection, lastRepair: this.state.lastRepair};
+        let booklet = {serviceInspection: this.state.serviceInspection, repair: this.state.repair, repairDate: this.state.repairDate, repairProducent: this.state.repairProducent};
 
         console.log("booklet => "+ JSON.stringify(booklet));
 
@@ -53,8 +60,16 @@ class BookletForm extends Component {
         this.setState({serviceInspection: event.target.value});
     }
 
-    changeLastRepairHandler = (event) => {
-        this.setState({lastRepair: event.target.value});
+    changeRepairHandler = (event) => {
+        this.setState({repair: event.target.value});
+    }
+
+    changeRepairDateHandler = (event) => {
+        this.setState({repairDate: event.target.value});
+    }
+
+    changeRepairProducentHandler = (event) => {
+        this.setState({repairProducent: event.target.value});
     }
 
     cancel(){
@@ -75,11 +90,27 @@ class BookletForm extends Component {
                         />
                     </div>                        
                     <div className = "form-group">
-                        <label> Ostatnia naprawa </label>
-                        <input name="lastName" 
+                        <label> Naprawy </label>
+                        <input name="repair" 
                             className="form-control" 
-                            value={this.state.lastRepair} 
-                            onChange={this.changeLastRepairHandler}
+                            value={this.state.repair} 
+                            onChange={this.changeRepairHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Data naprawy </label>
+                        <input name="repairDate" 
+                            className="form-control" 
+                            value={this.state.repairDate} 
+                            onChange={this.changeRepairDateHandler}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label> Producent części </label>
+                        <input name="repairProducent" 
+                            className="form-control" 
+                            value={this.state.repairProducent} 
+                            onChange={this.changeRepairProducentHandler}
                         />
                     </div><br />
                     <Button size="md"

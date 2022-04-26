@@ -66,8 +66,16 @@ class Booklet extends Component {
                                     <td>{ this.state.booklet.serviceInspection }</td>
                                 </tr>
                                 <tr>
-                                    <td>Ostatnia naprawa</td>
-                                    <td>{ this.state.booklet.lastRepair }</td>
+                                    <td>Naprawy</td>
+                                    <td>{ this.state.booklet.repair }</td>
+                                </tr>
+                                <tr>
+                                    <td>Data naprawy</td>
+                                    <td>{ this.state.booklet.repairDate }</td>
+                                </tr>
+                                <tr>
+                                    <td>Producent części</td>
+                                    <td>{ this.state.booklet.repairProducent }</td>
                                 </tr>
                             </tbody> 
                         </Table>

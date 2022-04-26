@@ -67,7 +67,7 @@ class CarForm extends Component {
             available: this.state.available, type: this.state.type};
         console.log('car => ' + JSON.stringify(car));
 
-        let booklet = { serviceInspection:"2000-01-01", lastRepair:"brak" }
+        let booklet = { serviceInspection:"2000-01-01", repair:"brak",  repairDate:"brak",  repairProducent:"brak"}
         console.log('booklet => ' + JSON.stringify(booklet));
 
         if(this.state.id === '_add'){

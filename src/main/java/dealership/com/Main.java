@@ -8,8 +8,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 @SpringBootApplication
 public class Main {
 
-    public static final String LOCALHOST = "http://localhost:3000";
-
     public static void main(String[] args) {
         SpringApplication.run(Main.class);
     }
