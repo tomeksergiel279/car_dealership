@@ -56,6 +56,30 @@ export const Cars = () => {
         window.location.replace(`http://localhost:3000/add-car/${id}`);
     }
 
+    const reservateCar = (id) => {
+        CarService.GetCarById(id).then(res => {
+            let car = res.data;
+
+            if(car.reservation === 'Tak' || car.available === 'Nie'){
+                toast.error("Samochód jest już zarezerwowany lub nie jest dostępny");
+            }
+            else{
+                car.reservation = 'Tak';
+                CarService.updateCar(car, id).then(res => {
+                    if(res.status === 200){
+                        toast.success("Samochód został zarezerwowany");
+                    }else{
+                        toast.error("Błąd");
+                    }
+                })          
+            }
+        })
+    }
+
+    const message = (id) => {
+        toast.success("Powiadomienie zostanie wysłane");
+    }
+
     return (
         <div><br />
         <h2 className='text-center display-5 mb-3'>Filtrowanie</h2>
@@ -173,13 +197,25 @@ export const Cars = () => {
                                         </tr>
                                     </tbody>
                                 </Table>
+                                { user.userType === 'client' && car.reservation === 'Nie' && car.available === 'Tak' && <Button onClick = { () => reservateCar(car.id) } 
+                                    size="md" 
+                                    variant="secondary" 
+                                    type="submit">
+                                    Rezerwuj
+                                </Button> }
+                                { user.userType === 'client' && (car.reservation === 'Tak' || car.available === 'Nie') && <Button onClick = { () => message(car.id) } 
+                                    size="md" 
+                                    variant="secondary" 
+                                    type="submit">
+                                    Wyślij powiadomienie o dostępności
+                                </Button> }
                                 { user.userType === 'employee' && <Button onClick = { () => editCar(car.id)} 
                                     size="md" 
                                     variant="secondary" 
                                     type="submit">
                                     Modyfikuj
                                 </Button> }
-                                { user.userType === 'employee' &&<Button onClick = { () => deleteCar(car.id)} 
+                                { user.userType === 'employee' && <Button onClick = { () => deleteCar(car.id)} 
                                     style={{marginLeft: "10px"}} 
                                     size="md" 
                                     variant="danger" 
