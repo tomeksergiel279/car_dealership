@@ -25,9 +25,12 @@ export const Login = () => {
         password: password
     })
     .then((res) => {
+        let client = res.data; 
+
         localStorage.setItem('user', JSON.stringify({
             "login": login,
-            "userType": userType
+            "userType": userType,
+            "email": client.email
         }));
         toast.success("Udało się zalogować");
         history.push("/home");

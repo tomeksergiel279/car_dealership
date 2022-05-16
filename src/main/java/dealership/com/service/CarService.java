@@ -1,5 +1,7 @@
 package dealership.com.service;
 
+import dealership.com.email.SendEmail;
+import dealership.com.email.SendMessage;
 import dealership.com.exception.ResourceAlreadyExist;
 import dealership.com.exception.ResourceNotFoundException;
 import dealership.com.model.Car;
@@ -9,14 +11,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/car")
 public class CarService {
+
+    SendEmail sendEmail = new SendEmail();
+    SendMessage sendMessage = new SendMessage();
 
     @Autowired
     CarRepository carRepository;
@@ -63,6 +68,52 @@ public class CarService {
         updateCar.setReservation(car.getReservation());
 
         carRepository.save(updateCar);
+
+        return ResponseEntity.ok(updateCar);
+    }
+
+    @PutMapping("reserve/{id}")
+    public ResponseEntity<Car> reserveCar(@PathVariable long id,@RequestBody Car car, @RequestHeader("email") String email) {
+        Car updateCar = carRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Car not exist with id: " + id));
+
+        updateCar.setReservation(car.getReservation());
+
+        sendEmail.sendReservation(email, car.getMark());
+
+        carRepository.save(updateCar);
+
+        Date now = new Date(System.currentTimeMillis());
+
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.setTime(now);
+        cal.add(Calendar.DATE, 3);
+
+        Date cancelDate = cal.getTime();
+        System.out.println(cancelDate);
+
+        Timer t = new Timer();
+        TimerTask tt = new TimerTask() {
+            @Override
+            public void run() {
+                Car updateCar = carRepository.findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Car not exist with id: " + id));
+                updateCar.setReservation("Nie");
+                carRepository.save(updateCar);
+            };
+        };
+        t.schedule(tt, cancelDate);
+
+        return ResponseEntity.ok(updateCar);
+    }
+
+    @PutMapping("message/{id}")
+    public ResponseEntity<Car> messageCar(@PathVariable long id,@RequestBody Car car, @RequestHeader("email") String email) {
+        Car updateCar = carRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Car not exist with id: " + id));
+
+
+        sendMessage.sendMessage(email, car.getMark());
 
         return ResponseEntity.ok(updateCar);
     }

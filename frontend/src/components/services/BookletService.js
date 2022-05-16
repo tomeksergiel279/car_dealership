@@ -20,8 +20,12 @@ class BookletService {
         return axios.get(BOOKLET_API_BASE_URL + '/' + bookletId);
     }
 
-    updateBooklet(booklet, bookletId){
-        return axios.put(BOOKLET_API_BASE_URL + '/' + bookletId, booklet);
+    updateBooklet(booklet, bookletId, email){
+        return axios.put(BOOKLET_API_BASE_URL + '/' + bookletId, booklet, {
+            headers: {
+                'email': email
+            }
+        })
     }  
 }
 export default new BookletService()

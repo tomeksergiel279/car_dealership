@@ -56,7 +56,7 @@ export const Cars = () => {
         window.location.replace(`http://localhost:3000/add-car/${id}`);
     }
 
-    const reservateCar = (id) => {
+    const reserveCar = (id) => {
         CarService.GetCarById(id).then(res => {
             let car = res.data;
 
@@ -65,7 +65,7 @@ export const Cars = () => {
             }
             else{
                 car.reservation = 'Tak';
-                CarService.updateCar(car, id).then(res => {
+                CarService.reserveCar(car, id, user.email).then(res => {
                     if(res.status === 200){
                         toast.success("Samochód został zarezerwowany");
                     }else{
@@ -76,7 +76,19 @@ export const Cars = () => {
         })
     }
 
-    const message = (id) => {
+    const messageCar = (id) => {
+        CarService.GetCarById(id).then(res => {
+            let car = res.data;
+
+            CarService.messageCar(car, id, user.email).then(res => {
+                if(res.status === 200){
+                    toast.success("Powiadomienie zostanie wysłane");
+                }else{
+                    toast.error("Błąd");
+                }
+            })          
+            
+        })
         toast.success("Powiadomienie zostanie wysłane");
     }
 
@@ -197,13 +209,13 @@ export const Cars = () => {
                                         </tr>
                                     </tbody>
                                 </Table>
-                                { user.userType === 'client' && car.reservation === 'Nie' && car.available === 'Tak' && <Button onClick = { () => reservateCar(car.id) } 
+                                { user.userType === 'client' && car.reservation === 'Nie' && car.available === 'Tak' && <Button onClick = { () => reserveCar(car.id) } 
                                     size="md" 
                                     variant="secondary" 
                                     type="submit">
                                     Rezerwuj
                                 </Button> }
-                                { user.userType === 'client' && (car.reservation === 'Tak' || car.available === 'Nie') && <Button onClick = { () => message(car.id) } 
+                                { user.userType === 'client' && (car.reservation === 'Tak' || car.available === 'Nie') && <Button onClick = { () => messageCar(car.id) } 
                                     size="md" 
                                     variant="secondary" 
                                     type="submit">

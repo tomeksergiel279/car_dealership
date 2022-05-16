@@ -1,10 +1,8 @@
 package dealership.com.service;
 
-import dealership.com.exception.ResourceAlreadyExist;
+import dealership.com.email.SendReminder;
 import dealership.com.exception.ResourceNotFoundException;
 import dealership.com.model.Car;
-import dealership.com.model.Department;
-import dealership.com.model.Employee;
 import dealership.com.model.ServiceBooklet;
 import dealership.com.repository.CarRepository;
 import dealership.com.repository.ServiceBookletRepository;
@@ -12,14 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.Calendar;
+import java.util.Date;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/servicebooklet")
 public class ServiceBookletService {
+
+    SendReminder sendReminder = new SendReminder();
 
     @Autowired
     ServiceBookletRepository serviceBookletRepository;
@@ -51,7 +55,7 @@ public class ServiceBookletService {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<ServiceBooklet> updateServiceBooklet(@PathVariable long id, @RequestBody ServiceBooklet serviceBooklet) {
+    public ResponseEntity<ServiceBooklet> updateServiceBooklet(@PathVariable long id, @RequestBody ServiceBooklet serviceBooklet, @RequestHeader("email") String email) throws ParseException {
         ServiceBooklet updateServiceBooklet = serviceBookletRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("ServiceBooklet not exist with id: " + id));
 
@@ -61,6 +65,26 @@ public class ServiceBookletService {
         updateServiceBooklet.setRepairProducent(serviceBooklet.getRepairProducent());
 
         serviceBookletRepository.save(updateServiceBooklet);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        Date date = sdf.parse(updateServiceBooklet.getServiceInspection());
+
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, -2);   //minus 2 days
+
+        Date sendDate = cal.getTime();
+
+        System.out.println(sendDate);
+
+        Timer t = new Timer();
+        TimerTask tt = new TimerTask() {
+            @Override
+            public void run() {
+                sendReminder.send(email);
+            };
+        };
+        t.schedule(tt, sendDate);
 
         return ResponseEntity.ok(updateServiceBooklet);
     }

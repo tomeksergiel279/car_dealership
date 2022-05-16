@@ -20,6 +20,22 @@ class CarService {
         return axios.put(CAR_API_BASE_URL + '/' + carId, car);
     }
 
+    reserveCar(car, carId, email){
+        return axios.put(CAR_API_BASE_URL + '/reserve/' + carId, car, {
+            headers: {
+                'email': email
+            }
+        })
+    }
+
+    messageCar(car, carId, email){
+        return axios.put(CAR_API_BASE_URL + '/message/' + carId, car, {
+            headers: {
+                'email': email
+            }
+        })
+    }
+
     deleteCar(carId){
         return axios.delete(CAR_API_BASE_URL + '/' + carId);
     }

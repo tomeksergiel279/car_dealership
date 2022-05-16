@@ -44,7 +44,7 @@ class BookletForm extends Component {
 
         console.log("booklet => "+ JSON.stringify(booklet));
 
-        BookletService.updateBooklet(booklet,this.state.id).then( res => {
+        BookletService.updateBooklet(booklet,this.state.id, "tomek10XD@interia.pl ").then( res => {
             if(res.status === 200) 
             {
                 toast.success('Książka serwisowa zmodyfikowana') 
