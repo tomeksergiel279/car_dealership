@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-@CrossOrigin(origins = "https://car-dealership-pk.netlify.app")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/car")
 public class CarService {

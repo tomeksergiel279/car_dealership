@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.Calendar;
 import java.util.Date;
 
-@CrossOrigin(origins = "https://car-dealership-pk.netlify.app")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/servicebooklet")
 public class ServiceBookletService {
